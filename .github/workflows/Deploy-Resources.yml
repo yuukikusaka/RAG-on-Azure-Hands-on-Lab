@@ -37,7 +37,7 @@ jobs:
           parameters: ./bicep/parameters/storageaccount.bicepparam
       
       - name: Upload files to Azure storage account
-        naes: azure/cli@v2
+        uses: azure/cli@v2
         with:
           azcliversion: latest
           inlineScript: |
