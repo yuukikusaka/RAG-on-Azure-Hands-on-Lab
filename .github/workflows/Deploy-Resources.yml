@@ -8,6 +8,10 @@ on:
         required: true
         default: 'rg-cloudworkshop'
 
+# Require write permission to Fetch an OIDC token.
+permissions:
+  id-token: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
