@@ -38,11 +38,8 @@ jobs:
           parameters: ./bicep/parameters/storageaccount.bicepparam
       
       - name: Upload files to Azure storage account
-        #uses: azure/cli@v2
-        #with:
-        #  azcliversion: latest
-        #  inlineScript: |
-        #    az account show
-        run: |
-          echo "Uploading files to Azure storage account"
-          echo ${{ steps.create_storage_account.outputs.storageAccountName }}
+        uses: azure/cli@v2
+        with:
+          azcliversion: latest
+          inlineScript: |
+            az storage blob upload-batch --account-name ${{ steps.create_storage_account.outputs.storageAccountName }} --destination ${{ steps.create_storage_account.outputs.containerName }} --source ./contents
