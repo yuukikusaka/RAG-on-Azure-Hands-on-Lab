@@ -1,4 +1,4 @@
 name: Deploy Key Vault
 
 on:
-  workflow_dispatch
+  workflow_dispatch:
