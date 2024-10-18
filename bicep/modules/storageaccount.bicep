@@ -29,3 +29,4 @@ resource container 'Microsoft.Storage/storageAccounts/blobServices/containers@20
 }
 
 output storageAccountName string = storageAccount.name
+output containerName string = container.name
