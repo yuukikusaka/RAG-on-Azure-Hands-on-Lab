@@ -11,9 +11,10 @@ on:
 # Require write permission to Fetch an OIDC token.
 permissions:
   id-token: write
+  contents: read
 
 jobs:
-  build:
+  deploy-storage_and_upload-files:
     runs-on: ubuntu-latest
 
     steps:
@@ -32,5 +33,12 @@ jobs:
         with:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: ${{ github.event.inputs.resourceGroup }}
-          template: ../../bicep/modules/storageaccount.bicep
-          parameters: ../../bicep/parameters/storageaccount.bicepparam
+          template: ./bicep/modules/storageaccount.bicep
+          parameters: ./bicep/parameters/storageaccount.bicepparam
+      
+      - name: Upload files to Azure storage account
+        naes: azure/cli@v2
+        with:
+          azcliversion: latest
+          inlineScript: |
+            az account show
