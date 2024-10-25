@@ -26,6 +26,12 @@ Bastion の Developer SKU を使用する場合は、利用できるリージョ
 
 <br />
 
+### 事前準備環境
+
+<img src="./images/preparation.png" />
+
+<br />
+
 ### GitHub Actions による一括展開
 
 #### 事前準備
