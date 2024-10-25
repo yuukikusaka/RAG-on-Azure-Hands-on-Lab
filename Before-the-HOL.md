@@ -17,9 +17,7 @@
 
 GitHub Actions による一括展開、Azure CLI を使用しての個々のリソース展開の選択が可
 
-Bastion の Developer SKU を使用する場合は、利用できるリージョンの事前確認が必要
-
-<a href="https://learn.microsoft.com/ja-jp/azure/bastion/quickstart-developer-sku">Azure Bastion をデプロイする ‐ Developer SKU</a>
+Bastion の Developer SKU を使用する場合は、利用できるリージョンの事前確認が必要 (<a href="https://learn.microsoft.com/ja-jp/azure/bastion/quickstart-developer-sku">Azure Bastion をデプロイする ‐ Developer SKU</a>)
 
 
 - [GitHub Actions による一括展開](#github-actions-による一括展開)
