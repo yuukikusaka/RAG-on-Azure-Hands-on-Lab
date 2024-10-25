@@ -1,3 +1,6 @@
+<img src="./images/mcw-fy25q2.png" />
+
+<br />
 
 ### ディレクトリ構成
 
