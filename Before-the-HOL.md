@@ -15,12 +15,12 @@
 
 ### 索引
 
-<div style="display:table; background-color:#d6eaff; height: 30px;">
-  <p style="display:table-cell; padding: 8px 3px 2px;"><img src="./images/Info.png" /></p>
-  <p style="display:table-cell; color:#000; vertical-align: middle; padding: 5px 10px 5px 0px;">GitHub Actions による一括展開、Azure CLI を使用しての個々のリソース展開を選択いただけます。<br />Bastion の Developer SKU を使用する場合は、現在利用できるリージョンが限定されておりますので、事前にご確認ください。<br /><a href="https://learn.microsoft.com/ja-jp/azure/bastion/quickstart-developer-sku">Azure Bastion をデプロイする ‐ Developer SKU</a></p>
-</div>
+GitHub Actions による一括展開、Azure CLI を使用しての個々のリソース展開の選択が可
 
-<br />
+Bastion の Developer SKU を使用する場合は、利用できるリージョンの事前確認が必要
+
+<a href="https://learn.microsoft.com/ja-jp/azure/bastion/quickstart-developer-sku">Azure Bastion をデプロイする ‐ Developer SKU</a>
+
 
 - [GitHub Actions による一括展開](#github-actions-による一括展開)
 
