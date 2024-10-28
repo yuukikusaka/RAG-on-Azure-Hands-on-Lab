@@ -39,7 +39,7 @@ Dec 2024
 
   <img src="./images/connect-to-azure-vm-03.png" />
 
-  [!CAUTION]
+  > [!CAUTION]
   > 初回接続時にポップアップ ブロック機能により画面が表示されない場合:  
   > ポップアップ ブロックのアイコンをクリックし、ポップアップとリダイレクトを許可したのち再度接続を実行
 
@@ -79,7 +79,7 @@ Dec 2024
 
 - 複製先となるローカル ディレクトリを選択
 
-  [!CAUTION]
+  > [!CAUTION]
   > GitHub の認証情報が求められた場合は、資格情報を入力し認証を実施
 
 - クローンされたリポジトリを開きますか？のメッセージが表示されるので **Open** をクリック
@@ -138,7 +138,7 @@ Dec 2024
 
     <img src="./images/create-index-04.png" />
 
-    [!NOTE]
+    > [!NOTE]
     > 無料リソースは、インデクサーあたり 1 日 20 個のドキュメントまでのエンリッチに制限
 
   - **エンリッチメントの追加**
@@ -173,25 +173,118 @@ Dec 2024
 
 - **対象インデックスをカスタマイズします** タブでインデックスとして格納するフィールドを設定
 
-  | フィールド名 | 取得可能 | フィルター可能 | ソート可能 | ファセット可能 | 検索可能 | アナライザー | Suggester |
+  | フィールド名 | 取得<br />可能 | フィルター<br />可能 | ソート<br />可能 | ファセット<br />可能 | 検索<br />可能 | アナライザー | Suggester |
   | --- | :---: | :---: | :---: | :---: | :---: | --- | :---: |
-  |contnt |●||||●| [日本語 ‐ Microsoft アナライザー](#font-size 10px) ||
+  |contnt|●||||●|日本語 ‐ Microsoft||
   |metadata_storage_size|●|●|●|●||||
   |metadata_storage_last_modified|●|●|●|●||||
   |metadata_storage_name|●|||||||
   |metadata_storage_file_extension|●|●|●|●||||
-  |people|●|●||●|●|日本語 ‐ Microsoft アナライザー||
-  |organizations|●|●||●|●|日本語 ‐ Microsoft アナライザー||
-  |locations|●|●||●|●|日本語 ‐ Microsoft アナライザー||
-  |keyphrases|●|●||●|●|日本語 ‐ Microsoft アナライザー||
+  |people|●|●||●|●|日本語 ‐ Microsoft||
+  |organizations|●|●||●|●|日本語 ‐ Microsoft||
+  |locations|●|●||●|●|日本語 ‐ Microsoft||
+  |keyphrases|●|●||●|●|日本語 ‐ Microsoft||
   |language|●|●|●|●|●|標準 ‐ Lucene||
-  |merged_content|●||||●|日本語 ‐ Microsoft アナライザー|●|
-  |text||||||||
-  |layoutText|●||||●|日本語 ‐ Microsoft アナライザー||
+  |merged_content|●||||●|日本語 ‐ Microsoft|●|
+  |text|●||||●|日本語 ‐ Microsoft||
+  |layoutText|●||||●|日本語 ‐ Microsoft||
   |imageTags|●|●||●|●|標準 ‐ Lucene||
   |imageTags|●|●||●|●|標準 ‐ Lucene||
 
 - **次: インデクサーの作成** をクリック
+
+- **インデクサーの作成** タブで必要項目を指定
+
+  <img src="./images/create-index-06.png" />
+
+  - **インデクサー**
+
+    - **名前**: azureblob-indexer (任意)
+
+    - **スケジュール**: １度
+
+  - **詳細オプション**
+
+    - **Base-64 エンコード キー**: オン
+
+- **送信** をクリックし、インデクサーを作成
+
+- Azure AI Search の管理ブレードで **検索管理** > **インデクサー** を選択
+
+  <img src="./images/create-index-07.png" />
+
+  > [!NOTE]
+  > ステータスに **成功** と表示されており、インデキシングが完了していることを確認
+
+<br />
+
+### Task 2: インデックス、スキルセットの設定
+
+- **検索管理** - **インデックス** を選択、インデックス名をクリック
+
+- **CORS** タブをクリック
+
+- **許可されたオリジンの種類** で **すべて** を選択し **保存** をクリック
+
+  <img src="./images/create-index-08.png" />
+
+  > [!NOTE]
+  > クライアントの JavaScript から API の呼び出しを許可するために CORS を有効化
+
+- **検索管理** > **スキルセット** を選択、スキルセット名をクリック
+
+  > [!NOTE]
+  > スキルセット ＝ 各スキルの定義とその実行順を JSON 形式で定義したもの
+
+- OCR スキルの言語、キーフレーズ抽出スキルの上限、エンティティ認識スキルの信頼度スコアの閾値を設定
+
+  <img src="./images/create-index-09.png" />
+
+  - OCR スキル (Microsoft.Skills.Vision.OcrSkill) の defaultLanguageCode を en から ja に変更
+
+    ```
+    "defaultLanguageCode": "ja"
+    ```
+
+  - キーフレーズ抽出 (Microsoft.Skills.Text.KeyPhraseExtractionsSkill) に追加
+
+    ```
+    "defaultLanguageCode": "en",
+    "maxKeyPhraseCount": 20
+    ```
+
+  - エンティティ認識スキル (Microsoft.Skills.Text.V3.EntityRecognitionSkill) に追加
+
+    ```
+    "defaultLanguageCode": "en",
+    "minimumPercision": 0.8
+    ```
+
+- **保存** をクリック
+
+<br />
+
+### Task 3: インデックスの再作成
+
+- **検索管理** > **インデクサー** を選択、インデクサー名をクリック
+
+- **リセット** をクリックし、インデキシングされたデータをクリア
+
+  <img src="./images/create-index-10.png" />
+
+- インデクサーのリセットのメッセージが表示されるので **はい** をクリック
+
+  <img src="./images/create-index-11.png" />
+
+- インデクサー ｘｘｘ は正常にリセットされましたの通知を確認し **実行** をクリック
+
+- インデクサーを実行のメッセージが表示されるので **はい** をクリック
+
+  <img src="./images/create-index-12.png" />
+
+- **最新の情報に更新** をクリックし、インデックスの再作成が正常に完了したことを確認
+
+  <img src="./images/create-index-13.png" />
 
 <br />
 
