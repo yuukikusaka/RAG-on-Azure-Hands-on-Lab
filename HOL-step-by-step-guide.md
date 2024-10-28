@@ -172,22 +172,22 @@ Dec 2024
 - **対象インデックスをカスタマイズします** タブでインデックスとして格納するフィールドを設定
 
   | フィールド名 | 取得可能 | フィルター可能 | ソート可能 | ファセット可能 | 検索可能 | アナライザー | Suggester |
-  | --- | :---: | :---: | :---: | :---: | :---: | --- | --- |
-  contnt |●||||●|日本語 ‐ Microsoft アナライザー||
-  metadata_storage_size|●|●|●|●||||
-  metadata_storage_last_modified|●|●|●|●||||
-  metadata_storage_name|●|||||||
-  metadata_storage_file_extension|●|●|●|●||||
-  people|●|●||●|●|日本語 ‐ Microsoft アナライザー||
-  organizations|●|●||●|●|日本語 ‐ Microsoft アナライザー||
-  locations|●|●||●|●|日本語 ‐ Microsoft アナライザー||
-  keyphrases|●|●||●|●|日本語 ‐ Microsoft アナライザー||
-  language|●|●|●|●|●|標準 ‐ Lucene||
-  merged_content|●||||●|日本語 ‐ Microsoft アナライザー|●|
-  text||||||||
-  layoutText|●||||●|日本語 ‐ Microsoft アナライザー||
-  imageTags|●|●||●|●|標準 ‐ Lucene||
-  imageTags|●|●||●|●|標準 ‐ Lucene||
+  | --- | :---: | :---: | :---: | :---: | :---: | --- | :---: |
+  |contnt |●||||●|日本語<br />Microsoft アナライザー||
+  |metadata_storage_size|●|●|●|●||||
+  |metadata_storage_last_modified|●|●|●|●||||
+  |metadata_storage_name|●|||||||
+  |metadata_storage_file_extension|●|●|●|●||||
+  |people|●|●||●|●|日本語<br />Microsoft アナライザー||
+  |organizations|●|●||●|●|日本語<br />Microsoft アナライザー||
+  |locations|●|●||●|●|日本語<br />Microsoft アナライザー||
+  |keyphrases|●|●||●|●|日本語<br />Microsoft アナライザー||
+  |language|●|●|●|●|●|標準<br />Lucene||
+  |merged_content|●||||●|日本語<br />Microsoft アナライザー|●|
+  |text||||||||
+  |layoutText|●||||●|日本語<br />Microsoft アナライザー||
+  |imageTags|●|●||●|●|標準<br />Lucene||
+  |imageTags|●|●||●|●|標準<br />Lucene||
 
 - **次: インデクサーの作成** をクリック
 
