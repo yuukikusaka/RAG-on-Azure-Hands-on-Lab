@@ -110,7 +110,7 @@ Dec 2024
 
   - **データ ソース**: Azure BLOB ストレージ
 
-  - **データ ソース名**: index-blob (任意)
+  - **データ ソース名**: blob (任意)
 
   - **抽出されるデータ**: コンテンツとメタデータ
 
@@ -148,6 +148,8 @@ Dec 2024
 
     - **ソース データ フィールド**: merged_content
 
+    - **エンリッチメントの粒度レベル**: ソース フィールド (既定)
+
     - **テキストの認知技術** で以下の項目をチェック (フィールド名は既定のままで OK)
 
       - **ユーザー名を抽出**
@@ -170,29 +172,39 @@ Dec 2024
 
 - **対象インデックスをカスタマイズします** タブでインデックスとして格納するフィールドを設定
 
-  | フィールド名 | 取得<br />可能 | フィルター<br />可能 | ソート<br />可能 | ファセット<br />可能 | 検索<br />可能 | アナライザー | Suggester |
-  | --- | :---: | :---: | :---: | :---: | :---: | --- | :---: |
-  |contnt|●||||●|日本語 ‐ Microsoft||
-  |metadata_storage_size|●|●|●|●||||
-  |metadata_storage_last_modified|●|●|●|●||||
-  |metadata_storage_name|●|||||||
-  |metadata_storage_file_extension|●|●|●|●||||
-  |people|●|●||●|●|日本語 ‐ Microsoft||
-  |organizations|●|●||●|●|日本語 ‐ Microsoft||
-  |locations|●|●||●|●|日本語 ‐ Microsoft||
-  |keyphrases|●|●||●|●|日本語 ‐ Microsoft||
-  |language|●|●|●|●|●|標準 ‐ Lucene||
-  |merged_content|●||||●|日本語 ‐ Microsoft|●|
-  |text|●||||●|日本語 ‐ Microsoft||
-  |layoutText|●||||●|日本語 ‐ Microsoft||
-  |imageTags|●|●||●|●|標準 ‐ Lucene||
-  |imageTags|●|●||●|●|標準 ‐ Lucene||
+  <img src="./images/create-index-06.png" />
+
+  - **インデックス名**: azureblob-index (任意)
+
+  - **キー**: metadata_storage_path
+
+  - **Suggester 名**: sg1 (任意)
+
+  - **検索モード**: analyzingInfixMatching
+
+    | フィールド名 | 取得<br />可能 | フィルター<br />可能 | ソート<br />可能 | ファセット<br />可能 | 検索<br />可能 | アナライザー | Suggester |
+    | --- | :---: | :---: | :---: | :---: | :---: | --- | :---: |
+    |content|●||||●|日本語 ‐ Microsoft||
+    |metadata_storage_size|●|●|●|●||||
+    |metadata_storage_last_modified|●|●|●|●||||
+    |metadata_storage_name|●|||||||
+    |metadata_storage_file_extension|●|●|●|●||||
+    |people|●|●||●|●|日本語 ‐ Microsoft||
+    |organizations|●|●||●|●|日本語 ‐ Microsoft||
+    |locations|●|●||●|●|日本語 ‐ Microsoft||
+    |keyphrases|●|●||●|●|日本語 ‐ Microsoft||
+    |language|●|●|●|●|●|標準 ‐ Lucene||
+    |merged_content|●||||●|日本語 ‐ Microsoft|●|
+    |text|●||||●|日本語 ‐ Microsoft||
+    |layoutText|●||||●|日本語 ‐ Microsoft||
+    |imageTags|●|●||●|●|標準 ‐ Lucene||
+    |imageTags|●|●||●|●|標準 ‐ Lucene||
 
 - **次: インデクサーの作成** をクリック
 
 - **インデクサーの作成** タブで必要項目を指定
 
-  <img src="./images/create-index-06.png" />
+  <img src="./images/create-index-07.png" />
 
   - **インデクサー**
 
@@ -208,7 +220,7 @@ Dec 2024
 
 - Azure AI Search の管理ブレードで **検索管理** > **インデクサー** を選択
 
-  <img src="./images/create-index-07.png" />
+  <img src="./images/create-index-08.png" />
 
   > ステータスに **成功** と表示されており、インデキシングが完了していることを確認
 
@@ -222,7 +234,7 @@ Dec 2024
 
 - **許可されたオリジンの種類** で **すべて** を選択し **保存** をクリック
 
-  <img src="./images/create-index-08.png" />
+  <img src="./images/create-index-09.png" />
 
   > クライアントの JavaScript から API の呼び出しを許可するために CORS を有効化
 
@@ -232,7 +244,7 @@ Dec 2024
 
 - OCR スキルの言語、キーフレーズ抽出スキルの上限、エンティティ認識スキルの信頼度スコアの閾値を設定
 
-  <img src="./images/create-index-09.png" />
+  <img src="./images/create-index-10.png" />
 
   - OCR スキル (Microsoft.Skills.Vision.OcrSkill) の defaultLanguageCode を en から ja に変更
 
@@ -264,21 +276,21 @@ Dec 2024
 
 - **リセット** をクリックし、インデキシングされたデータをクリア
 
-  <img src="./images/create-index-10.png" />
+  <img src="./images/create-index-11.png" />
 
 - インデクサーのリセットのメッセージが表示されるので **はい** をクリック
 
-  <img src="./images/create-index-11.png" />
+  <img src="./images/create-index-12.png" />
 
 - インデクサー ｘｘｘ は正常にリセットされましたの通知を確認し **実行** をクリック
 
 - インデクサーを実行のメッセージが表示されるので **はい** をクリック
 
-  <img src="./images/create-index-12.png" />
+  <img src="./images/create-index-13.png" />
 
 - **最新の情報に更新** をクリックし、インデックスの再作成が正常に完了したことを確認
 
-  <img src="./images/create-index-13.png" />
+  <img src="./images/create-index-14.png" />
 
 <br />
 
