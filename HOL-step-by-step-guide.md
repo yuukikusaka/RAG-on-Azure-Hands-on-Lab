@@ -39,9 +39,9 @@ Dec 2024
 
   <img src="./images/connect-to-azure-vm-03.png" />
 
-  - 初回接続時にポップアップ ブロック機能により画面が表示されない場合:
-  
-    ポップアップ ブロックのアイコンをクリックし、ポップアップとリダイレクトを許可したのち再度接続を実行
+  [!CAUTION]
+  > 初回接続時にポップアップ ブロック機能により画面が表示されない場合:  
+  > ポップアップ ブロックのアイコンをクリックし、ポップアップとリダイレクトを許可したのち再度接続を実行
 
 <br />
 
@@ -79,7 +79,8 @@ Dec 2024
 
 - 複製先となるローカル ディレクトリを選択
 
-  ※ GitHub の認証情報が求められた場合は、資格情報を入力し認証を実施
+  [!CAUTION]
+  > GitHub の認証情報が求められた場合は、資格情報を入力し認証を実施
 
 - クローンされたリポジトリを開きますか？のメッセージが表示されるので **Open** をクリック
 
@@ -137,7 +138,8 @@ Dec 2024
 
     <img src="./images/create-index-04.png" />
 
-    ※ 無料リソースは、インデクサーあたり 1 日 20 個のドキュメントまでのエンリッチに制限
+    [!NOTE]
+    > 無料リソースは、インデクサーあたり 1 日 20 個のドキュメントまでのエンリッチに制限
 
   - **エンリッチメントの追加**
 
@@ -173,21 +175,21 @@ Dec 2024
 
   | フィールド名 | 取得可能 | フィルター可能 | ソート可能 | ファセット可能 | 検索可能 | アナライザー | Suggester |
   | --- | :---: | :---: | :---: | :---: | :---: | --- | :---: |
-  |contnt |●||||●|日本語<br />Microsoft アナライザー||
+  |contnt |●||||●| [日本語 ‐ Microsoft アナライザー](#font-size 10px) ||
   |metadata_storage_size|●|●|●|●||||
   |metadata_storage_last_modified|●|●|●|●||||
   |metadata_storage_name|●|||||||
   |metadata_storage_file_extension|●|●|●|●||||
-  |people|●|●||●|●|日本語<br />Microsoft アナライザー||
-  |organizations|●|●||●|●|日本語<br />Microsoft アナライザー||
-  |locations|●|●||●|●|日本語<br />Microsoft アナライザー||
-  |keyphrases|●|●||●|●|日本語<br />Microsoft アナライザー||
-  |language|●|●|●|●|●|標準<br />Lucene||
-  |merged_content|●||||●|日本語<br />Microsoft アナライザー|●|
+  |people|●|●||●|●|日本語 ‐ Microsoft アナライザー||
+  |organizations|●|●||●|●|日本語 ‐ Microsoft アナライザー||
+  |locations|●|●||●|●|日本語 ‐ Microsoft アナライザー||
+  |keyphrases|●|●||●|●|日本語 ‐ Microsoft アナライザー||
+  |language|●|●|●|●|●|標準 ‐ Lucene||
+  |merged_content|●||||●|日本語 ‐ Microsoft アナライザー|●|
   |text||||||||
-  |layoutText|●||||●|日本語<br />Microsoft アナライザー||
-  |imageTags|●|●||●|●|標準<br />Lucene||
-  |imageTags|●|●||●|●|標準<br />Lucene||
+  |layoutText|●||||●|日本語 ‐ Microsoft アナライザー||
+  |imageTags|●|●||●|●|標準 ‐ Lucene||
+  |imageTags|●|●||●|●|標準 ‐ Lucene||
 
 - **次: インデクサーの作成** をクリック
 
