@@ -294,11 +294,238 @@ Dec 2024
 
 <br />
 
+### Task 4: 検索クエリの発行
+
+> 事前に Visual Studio Code 拡張機能で REST Client のインストールが必要  
+> インストールは、拡張機能タブで **REST Client** で検索し、**Install** をクリックして実行
+> <img src="./images/rest-client.png" />
+> 拡張機能の設定で Rest-Client: Decode Escaped Unicode Characters にチェック
+> <img src="./images/rest-client-settings.png" />
+> ※ Unicode でエンコードされた文字を自動的に対応する文字にデコードする処理の有効化
+
+- Visual Studio Code の Explorer タブで **test** > **search.http** ファイルを選択
+
+- baseUrl, index-name, api-key を指定
+
+  > baseUrl: Azure AI Search の概要画面に表示される Url
+  > index-name: 前の手順で作成したインデックス名
+  > api-key: Azure AI Search の **設定** > **キー** で管理されるクエリ キー
+
+- search に検索するテキスト (任意) を指定し、**Ctrl** + **Alt** + **R** キーを押下しリクエストを送信
+
+  > 右クリックで表示されるメニューから **Send Request** を選択でも OK
+
+- 検索結果が表示
+
+<br />
+
+### Task 5: フルテキスト検索
+
+- **search.http** ファイルの search の検索テキストを **画像 認識** に変更し、リクエストを送信
+
+  ```
+  "search": "画像 認識"
+  ```
+
+  > 検索結果: 8 件  
+  > 画像と認識のいずれか一方、または両方が含まれるドキュメントを検索 (OR 検索)  
+  > 画像 | 認識 の記述でも可
+
+- 検索テキストを **画像 + 認識** に変更し、再度リクエストを送信
+
+  ```
+  "search": "画像 + 認識"
+  ```
+
+  > 検索結果: 5 件  
+  > 画像と認識の両方が含まれているドキュメントを検索 (AND 検索)
+
+- 特定の用語を除外するよう検索テキストを **画像 -認識** に変更し、リクエストを送信
+
+  ```
+  "search": "画像 -認識"
+  ```
+
+  > 検索結果: 14 件  
+  > 画像を含むドキュメントと認識が含まれないドキュメントを検索 (NOR 検索)
+
+- 検索テキストに指定した条件をすべて満たして検索を行うため searchMode=all を指定し、リクエストを送信
+
+  ```
+    "search": "画像 -認識",
+    "searchMode": "all",
+    "count": true
+  ```
+
+  > 検索結果: 2 件  
+  > 画像を含み、且つ認識が含まれないドキュメントを検索 (NAND 検索)  
+  > 既定は searchMode=any で一部でも条件を満たすものを結果として取得
+
+- Full Lucene 構文を使用するため queryType を full に設定し検索を実行
+
+  ```
+    "search": "画像 OR 認識",
+    "queryType": "full",
+    "count": true
+  ```
+
+  > 検索結果: 8 件  
+  > 画像と認識のいずれか一方、または両方が含まれるドキュメントを検索 (OR 検索)  
+  > クエリ文字列にブール演算子の埋め込みが可、テキスト ブール演算子 (AND, OR, NOT) は大文字で指定
+
+- 単数文字のワイルドカード検索
+
+  ```
+    "search": "gpt-?",
+    "queryType": "full",
+    "count": true
+  ```
+
+  > 検索結果: 3 件
+  > GPT-3, GPT-4 などを含むドキュメントを検索
+
+- 複数文字のワイルドカード検索
+
+  ```
+    "search": "gpt-*",
+    "queryType": "full",
+    "count": true
+  ```
+
+  > 検索結果: 4 件
+  > GPT-3, GPT-4 に加え GPT-4o などを含むドキュメントを検索
+
+- 検索テキストの前に **「?」**, **「*」** を使用しての検索
+
+  > 正規表現の **/** (スラッシュ) 区切り記号が必要
+
+  ```
+    "search": "/.?udio/",
+    "queryType": "full",
+    "count": true
+  ```
+
+  ```
+    "search": "/.*udio/",
+    "queryType": "full",
+    "count": true
+  ```
+
+<br />
+
+### Task 6: 高度な検索
+
+- 検索結果に含めるフィールドを指定して検索
+
+  ```
+    "search": ".NET",
+    "select": "metadata_storage_name, metadata_storage_size, metadata_storage_last_modified",
+    "queryType": "full",
+    "count": true
+  ```
+
+  > select にカンマ区切りでフィールド名を指定
+  > インデックスで取得可能とマークしたフィールドのみ指定可
+  > 既定では取得可能とマークしたすべてのフィールドを含む結果を取得
+
+- 検索結果をファイル サイズの大きい順にソート
+
+  ```
+    "search": ".NET",
+    "select": "metadata_storage_name, metadata_storage_size, metadata_storage_last_modified",
+    "orderby": "metadata_storage_size desc",
+    "queryType": "full",
+    "count": true
+  ```
+
+  > orderby に並べ替えで使用するフィールドを指定
+  > インデックスでソート可能とマークしたフィールドのみ指定可
+  > 既定では関連性スコアを使用した順位付けで結果を取得
+
+- フィルター構文を使用した検索
+
+  ```
+    "search": ".NET",
+    "select": "metadata_storage_name, metadata_storage_size, metadata_storage_last_modified",
+    "filter": "metadata_storage_file_extension eq '.docx'",
+    "queryType": "full",
+    "count": true
+  ```
+
+  > filter にフィルター処理で使用するフィールドを指定  
+  > インデックスでフィルター可能とマークしたフィールドのみ指定可  
+  > and, or, not 演算子を使用して複数フィールドを指定可  
+  > フィルター処理が先にインデックスに適用され、その結果に対して検索が実行されるためパフォーマンス向上にも有効
+
+<br />
+
+### Task 7: デモ アプリの作成
+
+- [Azure Portal](https://portal.azure.com/) から Azure AI Search の管理ブレードを表示
+
+- **検索管理** > **インデックス** を選択し、インデックス名をクリック
+
+- **デモ アプリの作成** をクリック
+
+  <img src="./images/create-demo-01.png" />
+
+- **次へ** をクリック
+
+  <img src="./images/create-demo-02.png" />
+
+- 検索画面の左側に表示されるフィルター項目を設定
+
+  <img src="./images/create-demo-03.png" />
+
+  - **people** - **Checkbox**
+
+  - **organizations** - **Checkbox**
+
+  - **locations** - **Checkbox**
+
+  - **keyphrases** -  **Checkbox**
+
+  - **language** - **Checkbox**
+
+  - **imageTags** - **Checkbox**
+
+  - **imageCaption** - **Checkbox**
+
+- **次へ** をクリック
+
+- 検索ボックスの候補として表示されるフィールドを選択
+
+  <img src="./images/create-demo-04.png" />
+
+  > インデックス作成時に Suggester の設定を行った merged_content を選択
+
+- **デモ アプリの作成** をクリック
+
+- デモ アプリの準備完了のメッセージが表示されるので **ダウンロード** をクリックし、任意の場所に HTML ファイルを保存
+
+  <img src="./images/create-demo-05.png" />
+
+- ダウンロードした HTML ファイルをブラウザで開き、検索を実行
+
+  <img src="./images/create-demo-06.png" />
+
+  > HTML ファイル内に接続情報が含まれるため、本番環境での利用は厳禁
+
+<br />
+
 ### 参考情報
 
 - [Azure AI Search の概要](https://learn.microsoft.com/ja-jp/azure/search/search-what-is-azure-search)
 
+- [Azure AI Search の機能](https://learn.microsoft.com/ja-jp/azure/search/search-features-list)
+
 - [インデクサーの概要](https://learn.microsoft.com/ja-jp/azure/search/search-indexer-overview)
+
+- [ドキュメント検索 (Azure AI Search REST API)](https://learn.microsoft.com/ja-jp/rest/api/searchservice/search-documents)
+
+- [Simple query syntax in Azure AI Search](https://learn.microsoft.com/ja-jp/azure/search/query-simple-syntax)
+
+- [Lucene query syntax in Azure AI Search](https://learn.microsoft.com/ja-jp/azure/search/query-lucene-syntax)
 
 <br />
 
