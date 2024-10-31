@@ -1,0 +1,12 @@
+@baseUrl = Azure AI Search のエンドポイント URL
+@index-name = インデックス名
+@api-key = Azure AI Search のクエリ キー
+
+POST {{baseUrl}}/indexes/{{index-name}}/docs/search?api-version=2024-07-01
+Content-Type: application/json
+api-key: {{api-key}}
+
+{
+  "search": "*",
+  "count": true
+}
