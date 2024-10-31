@@ -298,17 +298,17 @@ Dec 2024
 
 > 事前に Visual Studio Code 拡張機能で REST Client のインストールが必要  
 > インストールは、拡張機能タブで **REST Client** で検索し、**Install** をクリックして実行
-> <img src="./images/rest-client.png" />
+> <img src="./images/rest-client.png" />  
 > 拡張機能の設定で Rest-Client: Decode Escaped Unicode Characters にチェック
-> <img src="./images/rest-client-settings.png" />
+> <img src="./images/rest-client-settings.png" />  
 > ※ Unicode でエンコードされた文字を自動的に対応する文字にデコードする処理の有効化
 
 - Visual Studio Code の Explorer タブで **test** > **search.http** ファイルを選択
 
 - baseUrl, index-name, api-key を指定
 
-  > baseUrl: Azure AI Search の概要画面に表示される Url
-  > index-name: 前の手順で作成したインデックス名
+  > baseUrl: Azure AI Search の概要画面に表示される Url  
+  > index-name: 前の手順で作成したインデックス名  
   > api-key: Azure AI Search の **設定** > **キー** で管理されるクエリ キー
 
 - search に検索するテキスト (任意) を指定し、**Ctrl** + **Alt** + **R** キーを押下しリクエストを送信
@@ -397,8 +397,6 @@ Dec 2024
 
 - 検索テキストの前に **「?」**, **「*」** を使用しての検索
 
-  > 正規表現の **/** (スラッシュ) 区切り記号が必要
-
   ```
     "search": "/.?udio/",
     "queryType": "full",
@@ -410,6 +408,8 @@ Dec 2024
     "queryType": "full",
     "count": true
   ```
+
+  > 正規表現の **/** (スラッシュ) 区切り記号が必要
 
 <br />
 
@@ -424,8 +424,8 @@ Dec 2024
     "count": true
   ```
 
-  > select にカンマ区切りでフィールド名を指定
-  > インデックスで取得可能とマークしたフィールドのみ指定可
+  > select にカンマ区切りでフィールド名を指定  
+  > インデックスで取得可能とマークしたフィールドのみ指定可  
   > 既定では取得可能とマークしたすべてのフィールドを含む結果を取得
 
 - 検索結果をファイル サイズの大きい順にソート
@@ -438,8 +438,8 @@ Dec 2024
     "count": true
   ```
 
-  > orderby に並べ替えで使用するフィールドを指定
-  > インデックスでソート可能とマークしたフィールドのみ指定可
+  > orderby に並べ替えで使用するフィールドを指定  
+  > インデックスでソート可能とマークしたフィールドのみ指定可  
   > 既定では関連性スコアを使用した順位付けで結果を取得
 
 - フィルター構文を使用した検索
@@ -526,17 +526,3 @@ Dec 2024
 - [Simple query syntax in Azure AI Search](https://learn.microsoft.com/ja-jp/azure/search/query-simple-syntax)
 
 - [Lucene query syntax in Azure AI Search](https://learn.microsoft.com/ja-jp/azure/search/query-lucene-syntax)
-
-<br />
-
-## Exercise 2: Azure OpenAI Searvice
-
-<br />
-
-## Exercise 3: API
-
-<br />
-
-## Exercise 4: Azure への展開
-
-<br />
