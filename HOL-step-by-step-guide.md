@@ -303,13 +303,17 @@ Dec 2024
 > <img src="./images/rest-client-settings.png" />  
 > ※ Unicode でエンコードされた文字を自動的に対応する文字にデコードする処理の有効化
 
+<br />
+
 - Visual Studio Code の Explorer タブで **test** > **search.http** ファイルを選択
 
 - baseUrl, index-name, api-key を指定
 
-  > baseUrl: Azure AI Search の概要画面に表示される Url  
-  > index-name: 前の手順で作成したインデックス名  
-  > api-key: Azure AI Search の **設定** > **キー** で管理されるクエリ キー
+  - **baseUrl**: Azure AI Search の概要画面に表示される Url
+
+  - **index-name**: 前の手順で作成したインデックス名  
+  
+  - **api-key**: Azure AI Search の **設定** > **キー** で管理されるクエリ キー
 
 - search に検索するテキスト (任意) を指定し、**Ctrl** + **Alt** + **R** キーを押下しリクエストを送信
 
