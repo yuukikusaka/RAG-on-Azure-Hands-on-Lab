@@ -112,6 +112,10 @@ Dec 2024
 
 ## Exercise 1: Azure AI Search の使用方法
 
+<img src="./images/Ex1.png" />
+
+<br />
+
 ### Task 1: インデックスの作成
 
 - Azure AI Search の管理ブレードへ移動
