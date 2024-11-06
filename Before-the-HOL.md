@@ -19,6 +19,8 @@ GitHub Actions による一括展開、Azure CLI を使用しての個々のリ�
 
 Bastion の Developer SKU を使用する場合は、利用できるリージョンの事前確認が必要 (<a href="https://learn.microsoft.com/ja-jp/azure/bastion/quickstart-developer-sku">Azure Bastion をデプロイする ‐ Developer SKU</a>)
 
+Embeddings モデルで text-embedding-3-small, text-embedding-3-large を使用する際は、利用できるリージョンの事前確認が必要 (<a href="https://learn.microsoft.com/ja-jp/azure/ai-services/openai/concepts/models?tabs=python-secure%2Cglobal-standard%2Cstandard-embeddings">Azure OpenAI Service models</a>)
+
 
 - [GitHub Actions による一括展開](#github-actions-による一括展開)
 
