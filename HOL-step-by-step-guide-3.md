@@ -111,6 +111,8 @@ Dec 2024
 
 - [共有プライベート リンク経由で接続する](https://learn.microsoft.com/ja-jp/azure/search/search-indexer-howto-access-private?tabs=portal-create)
 
+<br />
+
 ## Exercise 4: ベクトル インデックスの作成
 
 <img src="./images/Ex4.png" />
