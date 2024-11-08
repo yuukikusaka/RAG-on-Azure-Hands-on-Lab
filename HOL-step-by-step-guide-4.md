@@ -19,7 +19,13 @@ Dec 2024
 
   - [Task 5: OpenID Connect 認証を使用した Azure へのログイン](#task-5-openid-connect-認証を使用した-azure-へのログイン)
 
-- [Exercise 6: GitHub Actions を用いた Azure リソースの展開]
+- [Exercise 6: GitHub Actions を用いた Azure リソースの展開](#exercise-6-github-actions-を用いた-azure-リソースの展開)
+
+  - [Task 1: Bicep デプロイ用のパラメーター ファイルの作成](#task-1-bicep-デプロイ用のパラメーター-ファイルの作成)
+
+  - [Task 2: ワークフローの実行](#task-2-ワークフローの実行)
+
+  - [Task 3: Kay Vault へのアクセス権の付与](#task-3-kay-vault-へのアクセス権の付与)
 
 <br />
 
