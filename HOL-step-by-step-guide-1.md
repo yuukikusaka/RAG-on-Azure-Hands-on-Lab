@@ -118,7 +118,7 @@ Dec 2024
 
 ### Task 1: インデックスの作成
 
-- Azure AI Search の管理ブレードへ移動
+- [Azure Portal](https://portal.azure.com/) から Azure AI Search の **概要** を表示
 
 - **データのインポート** をクリック
 
@@ -238,7 +238,7 @@ Dec 2024
 
 - **送信** をクリックし、インデクサーを作成
 
-- Azure AI Search の管理ブレードで **検索管理** > **インデクサー** を選択
+- Azure AI Search の **検索管理** > **インデクサー** を選択
 
   <img src="./images/create-index-08.png" />
 
@@ -248,7 +248,7 @@ Dec 2024
 
 ### Task 2: インデックス、スキルセットの設定
 
-- **検索管理** - **インデックス** を選択、インデックス名をクリック
+- **検索管理** > **インデックス** を選択、インデックス名をクリック
 
 - **CORS** タブをクリック
 
@@ -325,7 +325,7 @@ Dec 2024
 
 <br />
 
-- Visual Studio Code の Explorer タブで **test** > **search.http** ファイルを選択
+- Visual Studio Code の Explorer で **test** > **search.http** ファイルを選択
 
 - baseUrl, index-name, api-key を指定
 
@@ -485,9 +485,7 @@ Dec 2024
 
 ### Task 7: デモ アプリの作成
 
-- [Azure Portal](https://portal.azure.com/) から Azure AI Search の管理ブレードを表示
-
-- **検索管理** > **インデックス** を選択し、インデックス名をクリック
+- [Azure Portal](https://portal.azure.com/) から Azure AI Search の **検索管理** > **インデックス** を選択し、インデックス名をクリック
 
 - **デモ アプリの作成** をクリック
 
