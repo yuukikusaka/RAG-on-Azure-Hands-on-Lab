@@ -325,7 +325,7 @@ Dec 2024
 
 <br />
 
-- Visual Studio Code の Explorer タブで **test** > **search.http** ファイルを選択
+- Visual Studio Code の Explorer で **test** > **search.http** ファイルを選択
 
 - baseUrl, index-name, api-key を指定
 
