@@ -145,7 +145,7 @@ Dec 2024
   
   - **職務ロール** で **ストレージ BLOB データ閲覧者** を選択し **次へ** をクリック
 
-    <img src="./IMAGES/role-assignment-07.png" />
+    <img src="./images/role-assignment-07.png" />
 
   - **アクセスの割り当て先** で **マネージド ID** を選択し **＋ メンバーを選択する** をクリック
 
