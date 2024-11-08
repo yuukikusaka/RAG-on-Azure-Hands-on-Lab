@@ -19,6 +19,8 @@ Dec 2024
 
   - [Task 5: OpenID Connect 認証を使用した Azure へのログイン](#task-5-openid-connect-認証を使用した-azure-へのログイン)
 
+- [Exercise 6: GitHub Actions を用いた Azure リソースの展開]
+
 <br />
 
 ## Exercise 5: GitHub Actions から Azure への接続
@@ -159,5 +161,85 @@ Dec 2024
 ### 参考情報
 
 - [GitHub Actions を使用して Azure に接続する](https://learn.microsoft.com/ja-jp/azure/developer/github/connect-from-azure?tabs=azure-portal%2Cwindows)
+
+<br />
+
+## Exercise 6: GitHub Actions を用いた Azure リソースの展開
+
+<img src="./images/Ex6.png" />
+
+<br />
+
+### Task 1: Bicep デプロイ用のパラメーター ファイルの作成
+
+- Web ブラウザで GitHub アカウントのリポジトリを表示
+
+- **Code** の **bicep** > **parameters** > **keyvault.bicepparam** を選択
+
+- **Edit this file** をクリック
+
+  <img src="./images/edit-bicep-parameters-01.png" />
+
+- **keyvaultName**, **location** を指定、**Confirm changes...** をクリックし変更を確定
+
+  - **keyvaultName**: Key Vault リソース名
+
+  - **location**: 展開先の Azure リージョン
+
+    <img src="./images/edit-bicep-parameters-02.png" />
+
+<br />
+
+### Task 2: ワークフローの実行
+
+- **Actions** を選択, **All workflows** > **Deploy Key Vault** を選択
+
+  <img src="./images/run-workflow-kv-01.png" />
+
+- **Run workflow** をクリック、展開先のリソース グループ名を入力し **Run workflow** をクリック
+
+  <img src="./images/run-workflow-kv-02.png" />
+
+- 進行中のワークフロー (**Deploy Key Vault**) をクリックし、実行の概要を表示
+
+  <img src="./images/deploy-key-vault-01.png" />
+
+- ジョブ (**deploy-key-vault**) をクリック
+
+  <img src="./images/deploy-key-vault-02.png" />
+
+- ステップを展開し、結果を確認
+
+  <img src="./images/deploy-key-vault-03.png" />
+
+<br />
+
+### Task 3: Kay Vault へのアクセス権の付与
+
+- [Azure Portal](https://portal.azure.com/) から Key Vault の **アクセス制御 (IAM)** を選択
+
+- **追加** > **ロールの割り当ての追加** をクリック
+
+- **職務ロール** > **キー コンテナー管理者** を選択
+
+  <img src="./images/role-assignment-13.png" />
+
+- **アクセスの割当先** で **ユーザー、グループ、またはサービス プリンシパル** を選択、**＋ メンバーを選択する** をクリック
+
+- ポータルにサインイン中のアカウントを指定し **選択** をクリック
+
+- **レビューと割り当て** をクリックし、ロールを割り当て
+
+<br />
+
+### 参考情報
+
+- [Azure 向けの GitHub Actions とは](https://learn.microsoft.com/ja-jp/azure/developer/github/github-actions)
+
+- [GitHub Actions を使用した Bicep ファイルのデプロイ](https://learn.microsoft.com/ja-jp/azure/azure-resource-manager/bicep/deploy-github-actions?tabs=CLI%2Cuserlevel)
+
+- [Key Vault のキー、証明書、シークレットへのアクセス権を付与する](https://learn.microsoft.com/ja-jp/azure/key-vault/general/rbac-guide?tabs=azure-cli)
+
+- [Azure Key Vault セキュリティ](https://learn.microsoft.com/ja-jp/azure/key-vault/general/security-features)
 
 <br />
