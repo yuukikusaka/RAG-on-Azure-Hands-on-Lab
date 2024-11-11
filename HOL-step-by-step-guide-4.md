@@ -266,6 +266,10 @@ Dec 2024
 
 ## Exercise 7: GitHub Actions を用いた API の展開
 
+<img src="./images/Ex7.png" />
+
+<br />
+
 ### Task 1: マネージド ID の作成
 
 <br />
