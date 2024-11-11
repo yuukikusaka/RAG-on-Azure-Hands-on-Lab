@@ -9,6 +9,14 @@ Dec 2024
 
 - [Exercise 8: API Management を使用した API の公開](#exercise-8-api-management-を使用した-api-の公開)
 
+  - [Task 1: プライベート エンドポイントの作成](#task-1-プライベート-エンドポイントの作成)
+
+  - [Task 2: API Management の展開](#task-2-api-management-の展開)
+
+  - [Task 3: API Management インスタンスと仮想ネットワークの統合](#task-3-api-management-インスタンスと仮想ネットワークの統合)
+
+  - [Task 4: API の公開](#task-4-api-の公開)
+
 <br />
 
 ## Exercise 8: API Management を使用した API の公開
