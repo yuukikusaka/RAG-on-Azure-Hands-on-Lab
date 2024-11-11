@@ -27,6 +27,20 @@ Dec 2024
 
   - [Task 3: Kay Vault へのアクセス権の付与](#task-3-kay-vault-へのアクセス権の付与)
 
+- [## Exercise 7: GitHub Actions を用いた API の展開](#exercise-7-github-actions-を用いた-api-の展開)
+
+  - [Task 1: マネージド ID の作成](#task-1-マネージド-id-の作成)
+
+  - [Task 2: ロールの割り当て](#task-2-ロールの割り当て)
+
+  - [Task 3: コンテナー イメージのビルド、プッシュ](#task-3-コンテナー-イメージのビルドプッシュ)
+
+  - [Task 4: Azure Container Apps へのイメージの展開](#task-4-azure-container-apps-へのイメージの展開)
+
+  - [Task 5: シークレットの登録](#task-5-シークレットの登録)
+
+  - [Task 6: API の動作確認](#task-6-api-の動作確認)
+
 <br />
 
 ## Exercise 5: GitHub Actions から Azure への接続
@@ -247,5 +261,31 @@ Dec 2024
 - [Key Vault のキー、証明書、シークレットへのアクセス権を付与する](https://learn.microsoft.com/ja-jp/azure/key-vault/general/rbac-guide?tabs=azure-cli)
 
 - [Azure Key Vault セキュリティ](https://learn.microsoft.com/ja-jp/azure/key-vault/general/security-features)
+
+<br />
+
+## Exercise 7: GitHub Actions を用いた API の展開
+
+### Task 1: マネージド ID の作成
+
+<br />
+
+### Task 2: ロールの割り当て
+
+<br />
+
+### Task 3: コンテナー イメージのビルド、プッシュ
+
+<br />
+
+### Task 4: Azure Container Apps へのイメージの展開
+
+<br />
+
+### Task 5: シークレットの登録
+
+<br />
+
+### Task 6: API の動作確認
 
 <br />
