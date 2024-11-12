@@ -19,6 +19,14 @@
 
 - [Bicep と Azure CLI を使用したリソースの展開](#bicep-と-azure-cli-を使用したリソースの展開)
 
+- [Private DNS Zone の作成](#private-dns-zone-の作成)
+
+- [仮想マシンの作成](#仮想マシンの作成)
+
+- [仮想マシンへの接続](#仮想マシンへの接続)
+
+<br />
+
 > GitHub Actions による一括展開、Azure CLI を使用しての個々のリソース展開の選択が可  
 >
 > Bastion の Developer SKU を使用する場合は、利用できるリージョンの事前確認が必要  
@@ -179,7 +187,7 @@
 
 <br />
 
-### ファイルのアップロード
+#### ファイルのアップロード
 
 - **contents** 配下のファイルを Blob コンテナへアップロード
 
@@ -189,13 +197,56 @@
 
 <br />
 
+### Private DNS Zone の作成
+
+> 内部環境で作成した Container Apps Environment に展開した Container Apps に対して  
+> 仮想ネットワーク内のリソースからアクセスするために必要な DNS の設定
+
+- Container Apps の **アプリケーション URL** を確認
+
+  https://<コンテナー アプリ名>.<ユニーク文字列>.<リージョン>.azurecontainerapps.io
+
+- **<ユニーク文字列>.<リージョン>.azurecontainerapps.io** の名前でプライベート DNS ゾーンを作成
+
+  <img src="./images/private-dns-zone-01.png" />
+
+  > リソース グループ、リソース名の指定のみで作成
+
+- 作成したプライベート DNS ゾーンに対して A レコードを登録
+
+  - **名前**: コンテナー アプリ名
+
+  - **種類**: A ‐ アドレス レコード
+
+  - **TTL**: 1
+
+  - **TTL の単位**: 時間
+
+  - **IP アドレス**: Container Apps Environment に静的 IP として割り当てられた値
+
+    <img src="./images/private-dns-zone-02.png" />
+
+- 仮想ネットワーク リンクを追加
+
+  <img src="./images/private-dns-zone-03.png" />
+
+  > リンク名は任意で OK、仮想マシンを展開する仮想ネットワークへリンク
+
+<br />
+
 ### 仮想マシンの作成
 
 <br />
 
-### Bastion Developer SKU の利用
+### 仮想マシンへの接続
 
-- 以下のリージョンに展開した場合は、Bastion Developer SKU を利用可能 (2024年10月時点)
+#### Bastion Developer SKU の利用
+
+- **Bastion** ページで資格情報を入力し **接続** をクリック時に Bastion Developer SKU がデプロイされ Bastion 経由で仮想マシンへ接続
+
+  <img src="./images/bastion-developer-sku.png" />
+
+  ※ 以下のリージョンに展開した場合は、Bastion Developer SKU を利用可能 (2024年10月時点)
 
   - 米国中部 EUAP (CentralUSEUAP)
 
@@ -209,15 +260,11 @@
 
   - 北ヨーロッパ (NorthEurope)
 
-- **Bastion** ページで資格情報を入力し **接続** をクリック時に Bastion Developer SKU がデプロイされ Bastion 経由で仮想マシンへ接続
-
-  <img src="./images/bastion-developer-sku.png" />
-
 <br />
 
-### Bastion Basic SKU の利用
+#### Bastion Basic SKU の利用
 
-- Bastion Developer SKU が利用不可のリージョンの場合、Bastion Basic SKU を展開
+> Bastion Developer SKU が利用不可のリージョンの場合、Bastion Basic SKU を展開
 
 - **bicep** > **parameters** 配下の **bastion.bicepparam** にリソースの情報を指定
 

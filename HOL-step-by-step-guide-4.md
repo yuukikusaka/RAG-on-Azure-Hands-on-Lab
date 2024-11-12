@@ -27,6 +27,20 @@ Dec 2024
 
   - [Task 3: Kay Vault へのアクセス権の付与](#task-3-kay-vault-へのアクセス権の付与)
 
+- [Exercise 7: GitHub Actions を用いた API の展開](#exercise-7-github-actions-を用いた-api-の展開)
+
+  - [Task 1: マネージド ID の作成](#task-1-マネージド-id-の作成)
+
+  - [Task 2: ロールの割り当て](#task-2-ロールの割り当て)
+
+  - [Task 3: コンテナー イメージのビルド、プッシュ](#task-3-コンテナー-イメージのビルドプッシュ)
+
+  - [Task 4: Azure Container Apps へのイメージの展開](#task-4-azure-container-apps-へのイメージの展開)
+
+  - [Task 5: シークレットの登録](#task-5-シークレットの登録)
+
+  - [Task 6: API の動作確認](#task-6-api-の動作確認)
+
 <br />
 
 ## Exercise 5: GitHub Actions から Azure への接続
@@ -247,5 +261,67 @@ Dec 2024
 - [Key Vault のキー、証明書、シークレットへのアクセス権を付与する](https://learn.microsoft.com/ja-jp/azure/key-vault/general/rbac-guide?tabs=azure-cli)
 
 - [Azure Key Vault セキュリティ](https://learn.microsoft.com/ja-jp/azure/key-vault/general/security-features)
+
+<br />
+
+## Exercise 7: GitHub Actions を用いた API の展開
+
+<img src="./images/Ex7.png" />
+
+<br />
+
+### Task 1: マネージド ID の作成
+
+- Azure Container Apps の **設定** > **ID** を選択
+
+- **システム割り当て済み** タブで **状態** を **オン** に変更し **保存** をクリック
+
+  <img src="./images/managed-identity-03.png" />
+
+- 確認のメッセージが表示されるので **はい** をクリック
+
+- システム割り当てマネージド ID の有効化が完了
+
+  <img src="./images/managed-identity-04.png" />
+
+<br />
+
+### Task 2: ロールの割り当て
+
+- Key Vault の **アクセス制御 (IAM)** を選択
+
+- **追加** > **ロールの割り当ての追加** をクリック
+
+- **職務ロール** で **キー コンテナー シークレット ユーザー** を選択し **次へ** をクリック
+
+  <img src="./images/role-assignment-14.png" />
+
+- **アクセスの割り当て先** で **マネージド ID** を選択し **＋ メンバーを選択する** をクリック
+
+- **マネージドID の選択** でサブスクリプション、マネージド ID (コンテナー アプリ) を選択
+
+- Container Apps のシステム割り当てマネージド ID をクリックし **選択** をクリック
+
+  <img src="./images/role-assignment-15.png" />
+
+- メンバーに選択したマネージド ID が表示されることを確認し **次へ** をクリック
+
+- **レビューと割り当て** をクリックし、ロールを割り当て
+
+<br />
+
+### Task 3: コンテナー イメージのビルド、プッシュ
+
+<br />
+
+### Task 4: Azure Container Apps へのイメージの展開
+
+<br />
+
+### Task 5: シークレットの登録
+
+<br />
+
+### Task 6: API の動作確認
 
 <br />
