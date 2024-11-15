@@ -1,6 +1,6 @@
 using '../templates/container.bicep'
 
-param acrName = 'acrmcwfy25q2g2'
+param acrName = 'acrmcwfy25q2g3110'
 
 param workspaceName = 'log-mcw25q2g2'
 param appInsightsName = 'appi-mcwfy25q2g22'
