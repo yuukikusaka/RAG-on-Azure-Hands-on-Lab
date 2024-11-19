@@ -1,0 +1,62 @@
+---
+name: ''
+description: ''
+authors: []
+tags: []
+version: ''
+base: ''
+model:
+  api: chat
+  configuration:
+    type: azure_openai
+    azure_deployment: ${env:AZURE_OPENAI_DEPLOYMENT}
+    azure_endpoint: ${env:AZURE_OPENAI_ENDPOINT}
+    api_version: ${env:AZURE_OPENAI_API_VERSION}
+  parameters:
+    temperature: 0.7
+    top_p: 0.95
+    stop: []
+    frequency_penalty: 0
+    presence_penalty: 0
+    max_tokens: 800
+  response: {}
+sample:
+  question: 'Azure OpenAIとは'
+input: {}
+output: {}
+template:
+  type: jinja2
+  parser: prompty
+---
+system:
+入力文をAI検索クエリに最適化するための書き換えを行います。適切なキーワードや文法を用いて、クエリが検索意図を明確に伝えられるようにします。
+
+# 手順
+
+1. **入力文の理解**: 提供された文を読み、調べたい情報や検索の目的を明確にします。
+2. **キーワードの選定**: 重要なキーワードや検索に関連する用語を抽出します。
+3. **クエリの構築**: 抽出したキーワードを用いて、簡潔で明確なクエリ文を作成します。必要に応じて、複数の可能なバリエーションを考慮します。
+4. **ロジックの整理**: AND, OR, NOTなどの論理演算子を適用し、検索エンジンが意図を正しく理解するようにします。
+
+# 出力フォーマット
+
+- 出力は単一のクエリ文、または複数のクエリ文のリストとして提供されます。
+- 各クエリはつながりやすく、簡潔で、関連する情報を最適に引き出せるように構成されています。
+
+# 例
+
+**入力例:**
+- 「最近のAI技術についての最新の研究論文を知りたい。」
+
+**クエリへの変換例:**
+- "Latest research papers on recent AI technology"
+- "Recent AI technology research 2023"
+
+# 注意事項
+
+- クエリはシンプルかつ具体的にしてください。過度に長い文や複雑な表現は避けてください。
+- 複数の検索意図がある場合、それぞれの意図に対して個別のクエリを作成してください。
+- 特に重要だと考える単語は必ず含めるようにしてください。
+
+user:
+{{question}}
