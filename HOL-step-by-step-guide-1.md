@@ -272,12 +272,14 @@ Dec 2024
     "defaultLanguageCode": "ja"
     ```
 
-  - キーフレーズ抽出 (Microsoft.Skills.Text.KeyPhraseExtractionsSkill) に追加
+  - キーフレーズ抽出 (Microsoft.Skills.Text.KeyPhraseExtractionSkill) に追加
 
     ```
     "defaultLanguageCode": "en",
     "maxKeyPhraseCount": 20
     ```
+    
+    > 生成するキー フレーズの最大数をセット。（[参考](https://learn.microsoft.com/ja-jp/azure/search/cognitive-search-skill-keyphrases)）
 
   - エンティティ認識スキル (Microsoft.Skills.Text.V3.EntityRecognitionSkill) に追加
 
@@ -285,6 +287,8 @@ Dec 2024
     "defaultLanguageCode": "en",
     "minimumPercision": 0.8
     ```
+
+    > 信頼度スコアがこの値よりも小さい場合は、エンティティは返されません。 既定値は 0 です。（[参考](https://learn.microsoft.com/ja-jp/azure/search/cognitive-search-skill-entity-recognition-v3)）
 
 - **保存** をクリック
 
