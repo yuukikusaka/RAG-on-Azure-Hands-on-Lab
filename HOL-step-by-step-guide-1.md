@@ -272,7 +272,7 @@ Dec 2024
     "defaultLanguageCode": "ja"
     ```
 
-  - キーフレーズ抽出 (Microsoft.Skills.Text.KeyPhraseExtractionsSkill) に追加
+  - キーフレーズ抽出 (Microsoft.Skills.Text.KeyPhraseExtractionSkill) に追加
 
     ```
     "defaultLanguageCode": "en",
