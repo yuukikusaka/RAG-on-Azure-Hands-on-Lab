@@ -19,7 +19,7 @@ public class ChatController : ControllerBase
     /// <exception cref="ArgumentNullException">
     /// <paramref name="aoaiService"/> がnullの場合にスローされます。
     /// </exception>
-    public ChatController(AoaiService(AoaiService aoaiService)
+    public ChatController(AoaiService aoaiService)
     {
         _aoaiService = aoaiService ?? throw new ArgumentNullException(nameof(aoaiService));
     }
