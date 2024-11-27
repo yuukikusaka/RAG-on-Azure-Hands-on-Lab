@@ -8,8 +8,16 @@ using Azure.Search.Documents.Models;
 
 namespace Simple.Services
 {
+    /// <summary>
+    /// Azure AI Searchに接続するためのSearchClientを構築します。
+    /// </summary>
     public class SearchClientBuilder
     {
+        /// <summary>
+        /// SearchClientインスタンスを構築して返します。
+        /// </summary>
+        /// <returns>SearchClientインスタンス。</returns>
+        /// <exception cref="InvalidOperationException">検索サービスの設定が不足している場合にスローされます。</exception>
         public SearchClient BuildSearchClient()
         {
             var searchServiceName = Environment.GetEnvironmentVariable("AI_SEARCH_SERVICE_NAME");
@@ -28,15 +36,27 @@ namespace Simple.Services
         }
     }
 
+    /// <summary>
+    /// Azure AI Searchを使用してAI検索サービスを提供します。
+    /// </summary>
     public class AiSearchService
     {
         private readonly SearchClientBuilder _searchClientBuilder;
 
+        /// <summary>
+        /// <see cref="AiSearchService"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="searchClientBuilder">SearchClientBuilderインスタンス。</param>
         public AiSearchService(SearchClientBuilder searchClientBuilder)
         {
             _searchClientBuilder = searchClientBuilder;
         }
 
+        /// <summary>
+        /// 指定されたクエリを使用して全文検索を実行します。
+        /// </summary>
+        /// <param name="query">検索クエリ。</param>
+        /// <returns>検索ドキュメントのリスト。</returns>
         public List<SearchDocument> FullTextSearch(string query)
         {
             var searchClient = _searchClientBuilder.BuildSearchClient();

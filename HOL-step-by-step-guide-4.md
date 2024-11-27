@@ -312,6 +312,41 @@ Dec 2024
 
 ### Task 3: コンテナー イメージのビルド、プッシュ
 
+<details>
+<summary>Python</summary>
+
+- Key Vault を使うようにコードを書き換え
+
+```python
+
+```
+
+- ブランチを切ってリモートリポジトリに push
+
+- GitHub Actions (`Deploy-Container-Image.yml`) を手動実行
+
+  - language に `python` を選択
+
+</details>
+
+<details>
+<summary>C#</summary>
+
+- Key Vault を使うようにコードを書き換え
+
+```csharp
+
+```
+
+- ブランチを切ってリモートリポジトリに push
+
+- GitHub Actions (`Deploy-Container-Image.yml`) を手動実行
+
+  - language に `csharp` を選択
+
+</details>
+
+
 <br />
 
 ### Task 4: Azure Container Apps へのイメージの展開

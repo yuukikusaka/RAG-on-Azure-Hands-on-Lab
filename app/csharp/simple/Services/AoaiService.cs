@@ -17,7 +17,9 @@ using OpenAI.Chat;
 
 namespace Simple.Services
 {
-
+    /// <summary>
+    /// Azure OpenAIと対話するためのサービスを提供します。
+    /// </summary>
     public class AoaiService
     {
 
@@ -26,6 +28,9 @@ namespace Simple.Services
         private readonly string aoaiApiVersion;
         private readonly string aoaiDeployment;
 
+        /// <summary>
+        /// <see cref="AoaiService"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
         public AoaiService()
         {
             aoaiEndpoint = Environment.GetEnvironmentVariable("AZURE_OPENAI_ENDPOINT");
@@ -34,6 +39,11 @@ namespace Simple.Services
             aoaiDeployment = Environment.GetEnvironmentVariable("AZURE_OPENAI_DEPLOYMENT");        
         }
 
+        /// <summary>
+        /// 非同期でチャット応答を取得します。
+        /// </summary>
+        /// <param name="query">ユーザーのクエリ。</param>
+        /// <returns>非同期操作を表すタスク。タスクの結果にはチャット応答が含まれます。</returns>
         public async Task<string> GetChatResponseAsync(string query)
         {
             var client = new AzureOpenAIClient(new Uri(aoaiEndpoint), new ApiKeyCredential(aoaiApiKey));
@@ -94,6 +104,11 @@ namespace Simple.Services
             return completion.Value.Content[0].Text;
         }
 
+        /// <summary>
+        /// 検索エンジン最適化のためにユーザーのクエリを非同期で書き換えます。
+        /// </summary>
+        /// <param name="query">ユーザーのクエリ。</param>
+        /// <returns>非同期操作を表すタスク。タスクの結果には書き換えられたクエリが含まれます。</returns>
         public async Task<string> RewriteQueryAsync(string query)
         {
             var client = new AzureOpenAIClient(new Uri(aoaiEndpoint), new ApiKeyCredential(aoaiApiKey));
@@ -125,6 +140,12 @@ namespace Simple.Services
             return completion.Value.Content[0].Text;
         }
 
+        /// <summary>
+        /// ユーザーのクエリと検索結果に基づいて非同期で回答を生成します。
+        /// </summary>
+        /// <param name="query">ユーザーのクエリ。</param>
+        /// <param name="searchResults">Azure AI Searchからの検索結果。</param>
+        /// <returns>非同期操作を表すタスク。タスクの結果には生成された回答が含まれます。</returns>
         public async Task<string> GenerateAnswerAsync(string query, List<SearchDocument> searchResults)
         {
             var client = new AzureOpenAIClient(new Uri(aoaiEndpoint), new ApiKeyCredential(aoaiApiKey));
