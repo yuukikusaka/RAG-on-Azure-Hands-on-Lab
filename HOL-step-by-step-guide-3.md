@@ -101,7 +101,7 @@ Dec 2024
 
   <img src="./images/shared-private-link-06.png" />
 
-- Azure OpenAI Service の管 **リソース管理** > **ネットワーク** を選択
+- Azure OpenAI Service の **リソース管理** > **ネットワーク** を選択
 
 - 同様の手順でプライベート エンドポイントを承認 
 
