@@ -350,8 +350,10 @@ Dec 2024
 
 - 以下のシークレットを Key Vault に登録
 
-  - **AZURE_OPENAI_API_KEY**: `Azure OpenAI の API キー`
-  - **AI_SEARCH_API_KEY**: `AI Search の API キー`
+  - **ai-search-api-key**: `AI Search の API キー`
+  - **azure-openai-api-key**: `Azure OpenAI の API キー`
+
+  > シークレット名に使用できるのは、英数字とダッシュのみです。
 
 ### Task 4: コンテナー イメージのビルド、プッシュ
 
@@ -363,13 +365,13 @@ Dec 2024
   - `./app/python/simple/service/ai_search_service.py` の 26 行目を以下のように修正
 
     ```python
-      get_secret_from_key_vault("AI_SEARCH_API_KEY")  # 元々は os.environ.get("AI_SEARCH_API_KEY")
+      get_secret_from_key_vault("ai-search-api-key")  # 元々は os.environ.get("AI_SEARCH_API_KEY")
     ```
 
   - `./app/python/simple/service/aoai_service.py` の 14 行目を以下のように修正
 
     ```python
-      get_secret_from_key_vault("AZURE_OPENAI_API_KEY")  # 元々は os.environ.get("AZURE_OPENAI_API_KEY")
+      get_secret_from_key_vault("azure-openai-api-key")  # 元々は os.environ.get("AZURE_OPENAI_API_KEY")
     ```
 
 - ブランチを切ってリモートリポジトリに push
