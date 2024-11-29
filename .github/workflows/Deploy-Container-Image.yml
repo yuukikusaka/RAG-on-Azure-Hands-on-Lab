@@ -56,7 +56,7 @@ jobs:
 
       - name: Set working directory
         id: set-working-directory
-        run: echo "##[set-output name=working-directory;]${{ github.event.inputs.language == 'python' && 'app/python' || 'app/csharp' }}"
+        run: echo "##[set-output name=working-directory;]${{ github.event.inputs.language == 'python' && 'app/python/simple' || 'app/csharp/simple' }}"
   
 
       - name: Build and push Docker image

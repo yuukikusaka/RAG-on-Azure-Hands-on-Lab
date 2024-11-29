@@ -3,6 +3,8 @@ import os
 from typing import List
 import openai
 
+from .helpers.helper_methods import get_secret_from_key_vault
+
 
 def set_openai_api_config():
     """
@@ -57,24 +59,24 @@ def chat(query: str) -> json:
                         ## 応答のフォーマット
                         {
                             "response": "回答",
-                            "user_hapiness": "ユーザーの満足度（1-5。5が一番満足度が高い）"
+                            "user_happiness": "ユーザーの満足度（1-5。5が一番満足度が高い）"
                         }
 
                         ## 応答例
                         1. ユーザー入力: 「最近、天気が良くて嬉しいですね！」
                         {
                             "response": "本当に！お天気がいいと気分も上がりますよね☀️ 今日は何か楽しい予定がありますか？",
-                            "user_hapiness": 5,
+                            "user_happiness": 5,
                         }
                         2. ユーザー入力: 「ちょっと困ってるんだけど…」
                         {
                             "response": "どうしましたか？何でもお聞きしますよ！一緒に考えましょう😊",
-                            "user_hapiness": 2,
+                            "user_happiness": 2,
                         }
                         3. ユーザー入力: 「休日に何をしようか迷ってる…」
                         {
                             "response": "それなら、散歩やカフェ巡りなんてどうですか？リラックスできますよ～☕️ あとは趣味に集中するのもいいかも！",
-                            "user_hapiness": 3,
+                            "user_happiness": 3,
                         }
 
                         ## 注意点
@@ -207,7 +209,7 @@ def generate_answer(query: str, search_results: list) -> json:
             },
             {
                 "role": "user",
-                "content": "{query}"
+                "content": query
             },
             {"role": "user", "content": str(search_results)},
         ],

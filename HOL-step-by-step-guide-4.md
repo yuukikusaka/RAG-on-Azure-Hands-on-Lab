@@ -232,6 +232,42 @@ Dec 2024
 
   <img src="./images/deploy-key-vault-03.png" />
 
+- 作成した Key Vault のリソース名を環境変数にセット
+
+  <details>
+  <summary>Python</summary>
+
+  - `./app/python/simple/.env` の `AZURE_KEY_VAULT_NAME` に、Key Vault のリソース名をセット（例: **kv-cwsfy25q2g1**）
+
+  ```
+  AZURE_OPENAI_ENDPOINT=https://your_aoai_service_name.openai.azure.com/
+  AZURE_OPENAI_API_KEY=your_aoai_key
+  AZURE_OPENAI_DEPLOYMENT=gpt-4o
+  AZURE_OPENAI_API_VERSION=2024-08-01-preview
+  AI_SEARCH_API_KEY=your_ai_search_key
+  AI_SEARCH_INDEX_NAME=azureblob-index
+  AI_SEARCH_SERVICE_NAME=your_ai_search_name
+  AZURE_KEY_VAULT_NAME=your_key_vault_name  # ← 例: kv-cwsfy25q2g1に置き換える
+  ```
+  </details>
+
+  <details>
+  <summary>C#</summary>
+
+  - `./app/csharp/simple/.env` の `AZURE_KEY_VAULT_NAME` に、Key Vault のリソース名をセット（例: **kv-cwsfy25q2g1**）
+
+  ```
+  AZURE_OPENAI_ENDPOINT=https://your_aoai_service_name.openai.azure.com/
+  AZURE_OPENAI_API_KEY=your_aoai_key
+  AZURE_OPENAI_DEPLOYMENT=gpt-4o
+  AZURE_OPENAI_API_VERSION=2024-08-01-preview
+  AI_SEARCH_API_KEY=your_ai_search_key
+  AI_SEARCH_INDEX_NAME=azureblob-index
+  AI_SEARCH_SERVICE_NAME=your_ai_search_name
+  AZURE_KEY_VAULT_NAME=your_key_vault_name  # ← 例: kv-cwsfy25q2g1に置き換える
+  ```
+  </details>
+
 <br />
 
 ### Task 3: Kay Vault へのアクセス権の付与
@@ -310,18 +346,51 @@ Dec 2024
 
 <br />
 
-### Task 3: コンテナー イメージのビルド、プッシュ
+### Task 3: シークレットの登録
+
+- 以下のシークレットを Key Vault に登録
+
+  - **ai-search-api-key**: `AI Search の API キー`
+  - **azure-openai-api-key**: `Azure OpenAI の API キー`
+
+  > シークレット名に使用できるのは、英数字とダッシュのみです。
+
+### Task 4: コンテナー イメージのビルド、プッシュ
 
 <details>
 <summary>Python</summary>
 
 - Key Vault を使うようにコードを書き換え
 
-```python
+  - `./app/python/simple/service/helpers/helper_methods.py` のコメントアウトを以下のように修正
 
-```
+    ```python
+    # return "dummy_secret"　　# ビルドエラーを回避するため、ダミーの値を返す
+    key_vault_name = os.getenv("AZURE_KEY_VAULT_NAME")
+    key_vault_uri = f"https://{key_vault_name}.vault.azure.net"
+    credential = DefaultAzureCredential()
+    client = SecretClient(vault_url=key_vault_uri, credential=credential)
+    secret = client.get_secret(secret_name)
+    return secret.value
+    ```
 
-- ブランチを切ってリモートリポジトリに push
+  - `./app/python/simple/service/ai_search_service.py` の 26 行目を以下のように修正
+
+    ```python
+      get_secret_from_key_vault("ai-search-api-key")  # 元々は os.environ.get("AI_SEARCH_API_KEY")
+    ```
+
+  - `./app/python/simple/service/aoai_service.py` の 14 行目を以下のように修正
+
+    ```python
+      get_secret_from_key_vault("azure-openai-api-key")  # 元々は os.environ.get("AZURE_OPENAI_API_KEY")
+    ```
+
+- リモートリポジトリに push
+
+  > ハンズオンのため、`main` ブランチに直接 push します。
+
+
 
 - GitHub Actions (`Deploy-Container-Image.yml`) を手動実行
 
@@ -334,9 +403,29 @@ Dec 2024
 
 - Key Vault を使うようにコードを書き換え
 
-```csharp
+  - `./app/csharp/simple/Services/Helpers/HelperMethods.cs` のコメントアウトを以下のように修正
 
-```
+    ```csharp
+      // return "DUMMY_SECRET";  // ビルドエラーを回避するため、ダミーの値を返す
+      string keyVaultName = Environment.GetEnvironmentVariable("AZURE_KEY_VAULT_NAME");
+      string keyVaultUri = $"https://{keyVaultName}.vault.azure.net";
+      var credential = new DefaultAzureCredential();
+      var client = new SecretClient(new Uri(keyVaultUri), credential);
+      KeyVaultSecret secret = client.GetSecret(secretName);
+      return secret.Value;
+    ```
+
+  - `./app/csharp/simple/Services/AiSearchService.cs` の 26 行目を以下のように修正
+
+    ```csharp
+      var apiKey = HelperMethods.GetSecretFromKeyVault("ai-search-api-key");  /// 元々は Environment.GetEnvironmentVariable("AI_SEARCH_API_KEY");
+    ```
+
+  - `./app/csharp/simple/Services/AoaiService.cs` の 38 行目を以下のように修正
+
+    ```csharp
+      aoaiApiKey = HelperMethods.GetSecretFromKeyVault("azure-openai-api-key");  /// 元々は Environment.GetEnvironmentVariable("AZURE_OPENAI_API_KEY");
+    ```
 
 - ブランチを切ってリモートリポジトリに push
 
@@ -349,11 +438,15 @@ Dec 2024
 
 <br />
 
-### Task 4: Azure Container Apps へのイメージの展開
+### Task 5: Azure Container Apps へのイメージの展開
+
+- 展開済みの Container Apps に移動、**リビジョンとレプリカ** を選択し、**[+ 新しいリビジョンを作成]** を押下
+
+- [コンテナー]タブで展開済みの **simple-hello-world-container** を削除し、**[+ 追加]** 、**アプリ コンテナー** を選択
+
+- Azure Container Registry、イメージ、イメージタグを選択し、**追加** を選択
 
 <br />
-
-### Task 5: シークレットの登録
 
 <br />
 

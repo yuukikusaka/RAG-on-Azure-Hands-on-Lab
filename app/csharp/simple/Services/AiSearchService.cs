@@ -5,6 +5,7 @@ using Azure;
 using Azure.Search.Documents;
 using Azure.Search.Documents.Indexes;
 using Azure.Search.Documents.Models;
+using Simple.Services.Helpers;
 
 namespace Simple.Services
 {
@@ -18,10 +19,9 @@ namespace Simple.Services
         /// </summary>
         /// <returns>SearchClientインスタンス。</returns>
         /// <exception cref="InvalidOperationException">検索サービスの設定が不足している場合にスローされます。</exception>
-        public SearchClient BuildSearchClient()
+        public SearchClient BuildSearchClient(string indexName)
         {
             var searchServiceName = Environment.GetEnvironmentVariable("AI_SEARCH_SERVICE_NAME");
-            var indexName = Environment.GetEnvironmentVariable("AI_SEARCH_INDEX_NAME");
             var apiKey = Environment.GetEnvironmentVariable("AI_SEARCH_API_KEY");
 
             if (string.IsNullOrEmpty(searchServiceName) || string.IsNullOrEmpty(indexName) || string.IsNullOrEmpty(apiKey))
@@ -59,7 +59,7 @@ namespace Simple.Services
         /// <returns>検索ドキュメントのリスト。</returns>
         public List<SearchDocument> FullTextSearch(string query)
         {
-            var searchClient = _searchClientBuilder.BuildSearchClient();
+            var searchClient = _searchClientBuilder.BuildSearchClient(Environment.GetEnvironmentVariable("AI_SEARCH_INDEX_NAME"));
             var options = new SearchOptions
             {
                 Size = 5
@@ -73,6 +73,34 @@ namespace Simple.Services
             foreach (SearchResult<SearchDocument> result in results.GetResults())
             {
                 searchResults.Add(result.Document);
+            }
+            return searchResults;
+        }
+
+        public List<SearchDocument> VectorSearch(ReadOnlyMemory<float> vectorizedQuery)
+        {
+            var searchClient = _searchClientBuilder.BuildSearchClient(Environment.GetEnvironmentVariable("AI_SEARCH_VECTOR_INDEX_NAME"));
+            var options = new SearchOptions
+            {
+                Size = 5,
+                VectorSearch = new()
+                {
+                    Queries = {
+                        new VectorizedQuery(vectorizedQuery)
+                        {
+                            KNearestNeighborsCount = 3,
+                            Fields = { "text_vector" }
+                        }
+                    }
+                }
+            };
+            SearchResults<SearchDocument> results = searchClient.Search<SearchDocument>(options);
+
+            List<SearchDocument> searchResults = new List<SearchDocument>();
+            foreach (SearchResult<SearchDocument> result in results.GetResults())
+            {
+                searchResults.Add(result.Document);
+                Console.WriteLine(result.Document); 
             }
             return searchResults;
         }

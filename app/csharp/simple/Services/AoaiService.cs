@@ -14,6 +14,8 @@ using Azure.Search.Documents.Indexes;
 using Azure.Search.Documents.Models;
 using Azure.Identity;
 using OpenAI.Chat;
+using OpenAI.Embeddings;
+using Simple.Services.Helpers;
 
 namespace Simple.Services
 {
@@ -27,6 +29,7 @@ namespace Simple.Services
         private readonly string aoaiApiKey;
         private readonly string aoaiApiVersion;
         private readonly string aoaiDeployment;
+        private readonly string embeddingModel;
 
         /// <summary>
         /// <see cref="AoaiService"/> クラスの新しいインスタンスを初期化します。
@@ -36,7 +39,8 @@ namespace Simple.Services
             aoaiEndpoint = Environment.GetEnvironmentVariable("AZURE_OPENAI_ENDPOINT");
             aoaiApiKey = Environment.GetEnvironmentVariable("AZURE_OPENAI_API_KEY");
             aoaiApiVersion = Environment.GetEnvironmentVariable("AZURE_OPENAI_API_VERSION");
-            aoaiDeployment = Environment.GetEnvironmentVariable("AZURE_OPENAI_DEPLOYMENT");        
+            aoaiDeployment = Environment.GetEnvironmentVariable("AZURE_OPENAI_DEPLOYMENT");      
+            embeddingModel = "text-embedding-3-small";  
         }
 
         /// <summary>
@@ -71,24 +75,24 @@ namespace Simple.Services
                         ## 応答のフォーマット
                         {
                             "response": "回答",
-                            "user_hapiness": "ユーザーの満足度（1-5。5が一番満足度が高い）"
+                            "user_happiness": "ユーザーの満足度（1-5。5が一番満足度が高い）"
                         }
 
                         ## 応答例
                         1. ユーザー入力: 「最近、天気が良くて嬉しいですね！」
                         {
                             "response": "本当に！お天気がいいと気分も上がりますよね☀️ 今日は何か楽しい予定がありますか？",
-                            "user_hapiness": 5,
+                            "user_happiness": 5,
                         }
                         2. ユーザー入力: 「ちょっと困ってるんだけど…」
                         {
                             "response": "どうしましたか？何でもお聞きしますよ！一緒に考えましょう😊",
-                            "user_hapiness": 2,
+                            "user_happiness": 2,
                         }
                         3. ユーザー入力: 「休日に何をしようか迷ってる…」
                         {
                             "response": "それなら、散歩やカフェ巡りなんてどうですか？リラックスできますよ～☕️ あとは趣味に集中するのもいいかも！",
-                            "user_hapiness": 3,
+                            "user_happiness": 3,
                         }
 
                         ## 注意点
@@ -198,6 +202,14 @@ namespace Simple.Services
                 new UserChatMessage(JsonConvert.SerializeObject(searchResults))
             );
             return completion.Value.Content[0].Text;
+        }
+
+        public ReadOnlyMemory<float> GetVectorizedQuery(string query)
+        {
+            AzureOpenAIClient client = new AzureOpenAIClient(new Uri(aoaiEndpoint), new ApiKeyCredential(aoaiApiKey));
+            EmbeddingClient embeddingClient = client.GetEmbeddingClient(embeddingModel);
+            OpenAIEmbedding embedding = embeddingClient.GenerateEmbedding(query);
+            return embedding.ToFloats();
         }
     }
 }
