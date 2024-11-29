@@ -209,7 +209,7 @@ def generate_answer(query: str, search_results: list) -> json:
             },
             {
                 "role": "user",
-                "content": "{query}"
+                "content": query
             },
             {"role": "user", "content": str(search_results)},
         ],

@@ -14,6 +14,7 @@ using Azure.Search.Documents.Indexes;
 using Azure.Search.Documents.Models;
 using Azure.Identity;
 using OpenAI.Chat;
+using OpenAI.Embeddings;
 using Simple.Services.Helpers;
 
 namespace Simple.Services
@@ -28,6 +29,7 @@ namespace Simple.Services
         private readonly string aoaiApiKey;
         private readonly string aoaiApiVersion;
         private readonly string aoaiDeployment;
+        private readonly string embeddingModel;
 
         /// <summary>
         /// <see cref="AoaiService"/> クラスの新しいインスタンスを初期化します。
@@ -35,9 +37,10 @@ namespace Simple.Services
         public AoaiService()
         {
             aoaiEndpoint = Environment.GetEnvironmentVariable("AZURE_OPENAI_ENDPOINT");
-            aoaiApiKey = HelperMethods.GetSecretFromKeyVault("azure-openai-api-key");
+            aoaiApiKey = Environment.GetEnvironmentVariable("AZURE_OPENAI_API_KEY");
             aoaiApiVersion = Environment.GetEnvironmentVariable("AZURE_OPENAI_API_VERSION");
-            aoaiDeployment = Environment.GetEnvironmentVariable("AZURE_OPENAI_DEPLOYMENT");        
+            aoaiDeployment = Environment.GetEnvironmentVariable("AZURE_OPENAI_DEPLOYMENT");      
+            embeddingModel = "text-embedding-3-small";  
         }
 
         /// <summary>
@@ -199,6 +202,14 @@ namespace Simple.Services
                 new UserChatMessage(JsonConvert.SerializeObject(searchResults))
             );
             return completion.Value.Content[0].Text;
+        }
+
+        public ReadOnlyMemory<float> GetVectorizedQuery(string query)
+        {
+            AzureOpenAIClient client = new AzureOpenAIClient(new Uri(aoaiEndpoint), new ApiKeyCredential(aoaiApiKey));
+            EmbeddingClient embeddingClient = client.GetEmbeddingClient(embeddingModel);
+            OpenAIEmbedding embedding = embeddingClient.GenerateEmbedding(query);
+            return embedding.ToFloats();
         }
     }
 }

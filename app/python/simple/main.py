@@ -57,7 +57,6 @@ def search_fulltext_handler(query: str):
     return {"answer": answer}
 
 
-# TODO: In-Progess
 @app.get("/search/vector")
 def search_vector_handler(query: str):
     """
@@ -73,5 +72,6 @@ def search_vector_handler(query: str):
     rewritten_query = rewrite_query(query)
     vector = get_embedding_from_query(rewritten_query)
     search_results = search_vector(vector)
-    answer = generate_answer("", search_results)
+    print("search_results", search_results)  # AI Search により返却された回答を確認するために追加
+    answer = generate_answer(query, search_results)
     return {"answer": answer}

@@ -325,6 +325,90 @@ Dec 2024
 
   <img src="./images/vector-index-13.png" />
 
+- アプリケーションから動作確認
+
+  <details>
+  <summary>Python</summary>
+
+  - `./app/python/simple/.env` の `AI_SEARCH_VECTOR_INDEX_NAME` にベクトル インデックス名をセット
+
+  ```.env
+  AZURE_OPENAI_ENDPOINT=https://your_aoai_service_name.openai.azure.com/
+  AZURE_OPENAI_API_KEY=your_aoai_key
+  AZURE_OPENAI_DEPLOYMENT=gpt-4o
+  AZURE_OPENAI_API_VERSION=2024-08-01-preview
+  AI_SEARCH_API_KEY=your_ai_search_key
+  AI_SEARCH_INDEX_NAME=azureblob-index
+  AI_SEARCH_SERVICE_NAME=your_ai_search_name
+  AZURE_KEY_VAULT_NAME=your_key_vault_name
+  AI_SEARCH_VECTOR_INDEX_NAME=vector-xxxxxxxxxxxx  <!-- これを修正 -->
+  ```
+
+  - 作業用端末にコンテナイメージをビルドし、実行
+
+  ```shell
+  cd app/python/simple
+  docker build -t python-simple:0.0.1 .
+  docker run -p 8080:8080 python-simple:0.0.1
+  ```
+
+  - ブラウザからベクトル検索 API をコールし、レスポンスを取得することを確認
+
+  > GET /search/vector?query={input} で、上記手順で試したベクトル検索を実施可能。APIは実装済み。
+
+  ```
+  http://localhost:8000/search/vector?query=Azure OpenAI の保護
+  ```
+
+  <img src="./images/vector-index-14.png" />
+
+  - コマンドプロンプトに、検索結果が標準出力されていることを確認
+
+  <img src="./images/vector-index-15.png" />
+
+  </details>
+
+  <details>
+  <summary>C#</summary>
+
+  - `./app/csharp/simple/.env` の `AI_SEARCH_VECTOR_INDEX_NAME` にベクトル インデックス名をセット
+
+  ```.env
+  AZURE_OPENAI_ENDPOINT=https://your_aoai_service_name.openai.azure.com/
+  AZURE_OPENAI_API_KEY=your_aoai_key
+  AZURE_OPENAI_DEPLOYMENT=gpt-4o
+  AZURE_OPENAI_API_VERSION=2024-08-01-preview
+  AI_SEARCH_API_KEY=your_ai_search_key
+  AI_SEARCH_INDEX_NAME=azureblob-index
+  AI_SEARCH_SERVICE_NAME=your_ai_search_name
+  AZURE_KEY_VAULT_NAME=your_key_vault_name
+  AI_SEARCH_VECTOR_INDEX_NAME=vector-xxxxxxxxxxxx  <!-- これを修正 -->
+  ```
+
+  - 作業用端末にコンテナイメージをビルドし、実行
+
+  ```shell
+  cd app/csharp/simple
+  docker build -t csharp-simple:0.0.1 .
+  docker run -p 8080:8080 csharp-simple:0.0.1
+  ```
+
+  - ブラウザからベクトル検索 API をコールし、レスポンスを取得することを確認
+
+  > GET /search/vector?query={input} で、上記手順で試したベクトル検索を実施可能。APIは実装済み。
+
+  ```
+  http://localhost:8000/search/vector?query=Azure OpenAI の保護
+  ```
+
+  <img src="./images/vector-index-17.png" />
+
+  - コマンドプロンプトに、検索結果が標準出力されていることを確認
+
+  <img src="./images/vector-index-16.png" />
+
+  </details>
+
 <br />
 
 ### 参考情報

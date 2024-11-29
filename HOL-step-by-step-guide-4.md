@@ -362,6 +362,18 @@ Dec 2024
 
 - Key Vault を使うようにコードを書き換え
 
+  - `./app/python/simple/service/helpers/helper_methods.py` のコメントアウトを以下のように修正
+
+    ```python
+    # return "dummy_secret"　　# ビルドエラー回避のため、ダミーの値を返す
+    key_vault_name = os.getenv("AZURE_KEY_VAULT_NAME")
+    key_vault_uri = f"https://{key_vault_name}.vault.azure.net"
+    credential = DefaultAzureCredential()
+    client = SecretClient(vault_url=key_vault_uri, credential=credential)
+    secret = client.get_secret(secret_name)
+    return secret.value
+    ```
+
   - `./app/python/simple/service/ai_search_service.py` の 26 行目を以下のように修正
 
     ```python
@@ -387,6 +399,18 @@ Dec 2024
 
 - Key Vault を使うようにコードを書き換え
 
+  - `./app/csharp/simple/Services/Helpers/HelperMethods.cs` のコメントアウトを以下のように修正
+
+    ```csharp
+      // return "DUMMY_SECRET";  // ビルドエラー回避のため、ダミーの値を返す
+      string keyVaultName = Environment.GetEnvironmentVariable("AZURE_KEY_VAULT_NAME");
+      string keyVaultUri = $"https://{keyVaultName}.vault.azure.net";
+      var credential = new DefaultAzureCredential();
+      var client = new SecretClient(new Uri(keyVaultUri), credential);
+      KeyVaultSecret secret = client.GetSecret(secretName);
+      return secret.Value;
+    ```
+
   - `./app/csharp/simple/Services/AiSearchService.cs` の 26 行目を以下のように修正
 
     ```csharp
@@ -396,7 +420,7 @@ Dec 2024
   - `./app/csharp/simple/Services/AoaiService.cs` の 38 行目を以下のように修正
 
     ```csharp
-      aoaiApiKey = HelperMethods.GetSecretFromKeyVault("azure-openai-api-key");  /// 元々は os.environ.get("AZURE_OPENAI_API_KEY")
+      aoaiApiKey = HelperMethods.GetSecretFromKeyVault("azure-openai-api-key");  /// 元々は Environment.GetEnvironmentVariable("AZURE_OPENAI_API_KEY");
     ```
 
 - ブランチを切ってリモートリポジトリに push

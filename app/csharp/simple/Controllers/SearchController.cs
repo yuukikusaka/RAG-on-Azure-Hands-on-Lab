@@ -39,8 +39,25 @@ public class SearchController : ControllerBase
     {
         try
         {
-            var rewritten_query = await _aoaiService.RewriteQueryAsync(query);
-            var results = _aiSearchService.FullTextSearch(rewritten_query);
+            var rewrittenQuery = await _aoaiService.RewriteQueryAsync(query);
+            var results = _aiSearchService.FullTextSearch(rewrittenQuery);
+            var response = await _aoaiService.GenerateAnswerAsync(query, results);
+            return Ok(response);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { error = ex.Message });
+        }
+    }
+
+    [HttpGet("vector")]
+    public async Task<IActionResult> VectorSearch(string query)
+    {
+        try
+        {
+            var rewrittenQuery = await _aoaiService.RewriteQueryAsync(query);
+            ReadOnlyMemory<float> vectorizedQuery = _aoaiService.GetVectorizedQuery(rewrittenQuery);
+            var results = _aiSearchService.VectorSearch(vectorizedQuery);
             var response = await _aoaiService.GenerateAnswerAsync(query, results);
             return Ok(response);
         }
