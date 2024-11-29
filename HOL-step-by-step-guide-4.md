@@ -247,7 +247,7 @@ Dec 2024
   AI_SEARCH_API_KEY=your_ai_search_key
   AI_SEARCH_INDEX_NAME=azureblob-index
   AI_SEARCH_SERVICE_NAME=your_ai_search_name
-  AZURE_KEY_VAULT_NAME=your_key_vault_name  // ← 例: kv-cwsfy25q2g1に置き換える
+  AZURE_KEY_VAULT_NAME=your_key_vault_name  # ← 例: kv-cwsfy25q2g1に置き換える
   ```
   </details>
 
@@ -386,7 +386,11 @@ Dec 2024
       get_secret_from_key_vault("azure-openai-api-key")  # 元々は os.environ.get("AZURE_OPENAI_API_KEY")
     ```
 
-- ブランチを切ってリモートリポジトリに push
+- リモートリポジトリに push
+
+  > ハンズオンのため、`main` ブランチに直接 push します。
+
+
 
 - GitHub Actions (`Deploy-Container-Image.yml`) を手動実行
 
