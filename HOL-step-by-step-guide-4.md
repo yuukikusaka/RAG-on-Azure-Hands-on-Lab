@@ -351,6 +351,12 @@ Dec 2024
 
 ### Task 4: Azure Container Apps へのイメージの展開
 
+- 展開済みの Container Apps に移動、**リビジョンとレプリカ** を選択し、**[+ 新しいリビジョンを作成]** を押下
+
+- [コンテナー]タブで展開済みの **simple-hello-world-container** を削除し、**[+ 追加]** 、**アプリ コンテナー** を選択
+
+- Azure Container Registry、イメージ、イメージタグを選択し、**追加** を選択
+
 <br />
 
 ### Task 5: シークレットの登録
