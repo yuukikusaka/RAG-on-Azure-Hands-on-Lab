@@ -365,7 +365,7 @@ Dec 2024
   - `./app/python/simple/service/helpers/helper_methods.py` のコメントアウトを以下のように修正
 
     ```python
-    # return "dummy_secret"　　# ビルドエラー回避のため、ダミーの値を返す
+    # return "dummy_secret"　　# ビルドエラーを回避するため、ダミーの値を返す
     key_vault_name = os.getenv("AZURE_KEY_VAULT_NAME")
     key_vault_uri = f"https://{key_vault_name}.vault.azure.net"
     credential = DefaultAzureCredential()
@@ -406,7 +406,7 @@ Dec 2024
   - `./app/csharp/simple/Services/Helpers/HelperMethods.cs` のコメントアウトを以下のように修正
 
     ```csharp
-      // return "DUMMY_SECRET";  // ビルドエラー回避のため、ダミーの値を返す
+      // return "DUMMY_SECRET";  // ビルドエラーを回避するため、ダミーの値を返す
       string keyVaultName = Environment.GetEnvironmentVariable("AZURE_KEY_VAULT_NAME");
       string keyVaultUri = $"https://{keyVaultName}.vault.azure.net";
       var credential = new DefaultAzureCredential();

@@ -18,7 +18,7 @@ namespace Simple.Services.Helpers
         /// <returns>シークレットの値。</returns>
         public static string GetSecretFromKeyVault(string secretName)
         {
-            return "DUMMY_SECRET";  // ビルドエラー回避のため、ダミーの値を返す
+            return "DUMMY_SECRET";  // ビルドエラーを回避するため、ダミーの値を返す
             // string keyVaultName = Environment.GetEnvironmentVariable("AZURE_KEY_VAULT_NAME");
             // string keyVaultUri = $"https://{keyVaultName}.vault.azure.net";
             // var credential = new DefaultAzureCredential();
