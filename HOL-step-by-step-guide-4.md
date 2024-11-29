@@ -264,7 +264,7 @@ Dec 2024
   AI_SEARCH_API_KEY=your_ai_search_key
   AI_SEARCH_INDEX_NAME=azureblob-index
   AI_SEARCH_SERVICE_NAME=your_ai_search_name
-  AZURE_KEY_VAULT_NAME=your_key_vault_name  // ← 例: kv-cwsfy25q2g1に置き換える
+  AZURE_KEY_VAULT_NAME=your_key_vault_name  # ← 例: kv-cwsfy25q2g1に置き換える
   ```
   </details>
 
