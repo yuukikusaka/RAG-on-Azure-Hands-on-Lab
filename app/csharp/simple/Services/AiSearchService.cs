@@ -5,6 +5,7 @@ using Azure;
 using Azure.Search.Documents;
 using Azure.Search.Documents.Indexes;
 using Azure.Search.Documents.Models;
+using Simple.Services.Helpers;
 
 namespace Simple.Services
 {
@@ -22,7 +23,7 @@ namespace Simple.Services
         {
             var searchServiceName = Environment.GetEnvironmentVariable("AI_SEARCH_SERVICE_NAME");
             var indexName = Environment.GetEnvironmentVariable("AI_SEARCH_INDEX_NAME");
-            var apiKey = Environment.GetEnvironmentVariable("AI_SEARCH_API_KEY");
+            var apiKey = HelperMethods.GetSecretFromKeyVault("ai-search-api-key");
 
             if (string.IsNullOrEmpty(searchServiceName) || string.IsNullOrEmpty(indexName) || string.IsNullOrEmpty(apiKey))
             {

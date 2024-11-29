@@ -387,9 +387,17 @@ Dec 2024
 
 - Key Vault を使うようにコードを書き換え
 
-```csharp
+  - `./app/csharp/simple/Services/AiSearchService.cs` の 26 行目を以下のように修正
 
-```
+    ```csharp
+      var apiKey = HelperMethods.GetSecretFromKeyVault("ai-search-api-key");  /// 元々は Environment.GetEnvironmentVariable("AI_SEARCH_API_KEY");
+    ```
+
+  - `./app/csharp/simple/Services/AoaiService.cs` の 38 行目を以下のように修正
+
+    ```csharp
+      aoaiApiKey = HelperMethods.GetSecretFromKeyVault("azure-openai-api-key");  /// 元々は os.environ.get("AZURE_OPENAI_API_KEY")
+    ```
 
 - ブランチを切ってリモートリポジトリに push
 

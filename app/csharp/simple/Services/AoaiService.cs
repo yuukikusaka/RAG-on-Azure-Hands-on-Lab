@@ -14,6 +14,7 @@ using Azure.Search.Documents.Indexes;
 using Azure.Search.Documents.Models;
 using Azure.Identity;
 using OpenAI.Chat;
+using Simple.Services.Helpers;
 
 namespace Simple.Services
 {
@@ -34,7 +35,7 @@ namespace Simple.Services
         public AoaiService()
         {
             aoaiEndpoint = Environment.GetEnvironmentVariable("AZURE_OPENAI_ENDPOINT");
-            aoaiApiKey = Environment.GetEnvironmentVariable("AZURE_OPENAI_API_KEY");
+            aoaiApiKey = HelperMethods.GetSecretFromKeyVault("azure-openai-api-key");
             aoaiApiVersion = Environment.GetEnvironmentVariable("AZURE_OPENAI_API_VERSION");
             aoaiDeployment = Environment.GetEnvironmentVariable("AZURE_OPENAI_DEPLOYMENT");        
         }
