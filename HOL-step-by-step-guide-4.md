@@ -232,6 +232,42 @@ Dec 2024
 
   <img src="./images/deploy-key-vault-03.png" />
 
+- 作成した Key Vault のリソース名を環境変数にセット
+
+  <details>
+  <summary>Python</summary>
+
+  - `./app/python/simple/.env` の `AZURE_KEY_VAULT_NAME` に、Key Vault のリソース名をセット（例: **kv-cwsfy25q2g1**）
+
+  ```
+  AZURE_OPENAI_ENDPOINT=https://your_aoai_service_name.openai.azure.com/
+  AZURE_OPENAI_API_KEY=your_aoai_key
+  AZURE_OPENAI_DEPLOYMENT=gpt-4o
+  AZURE_OPENAI_API_VERSION=2024-08-01-preview
+  AI_SEARCH_API_KEY=your_ai_search_key
+  AI_SEARCH_INDEX_NAME=azureblob-index
+  AI_SEARCH_SERVICE_NAME=your_ai_search_name
+  AZURE_KEY_VAULT_NAME=your_key_vault_name  // ← 例: kv-cwsfy25q2g1に置き換える
+  ```
+  </details>
+
+  <details>
+  <summary>C#</summary>
+
+  - `./app/csharp/simple/.env` の `AZURE_KEY_VAULT_NAME` に、Key Vault のリソース名をセット（例: **kv-cwsfy25q2g1**）
+
+  ```
+  AZURE_OPENAI_ENDPOINT=https://your_aoai_service_name.openai.azure.com/
+  AZURE_OPENAI_API_KEY=your_aoai_key
+  AZURE_OPENAI_DEPLOYMENT=gpt-4o
+  AZURE_OPENAI_API_VERSION=2024-08-01-preview
+  AI_SEARCH_API_KEY=your_ai_search_key
+  AI_SEARCH_INDEX_NAME=azureblob-index
+  AI_SEARCH_SERVICE_NAME=your_ai_search_name
+  AZURE_KEY_VAULT_NAME=your_key_vault_name  // ← 例: kv-cwsfy25q2g1に置き換える
+  ```
+  </details>
+
 <br />
 
 ### Task 3: Kay Vault へのアクセス権の付与
@@ -310,16 +346,31 @@ Dec 2024
 
 <br />
 
-### Task 3: コンテナー イメージのビルド、プッシュ
+### Task 3: シークレットの登録
+
+- 以下のシークレットを Key Vault に登録
+
+  - **AZURE_OPENAI_API_KEY**: `Azure OpenAI の API キー`
+  - **AI_SEARCH_API_KEY**: `AI Search の API キー`
+
+### Task 4: コンテナー イメージのビルド、プッシュ
 
 <details>
 <summary>Python</summary>
 
 - Key Vault を使うようにコードを書き換え
 
-```python
+  - `./app/python/simple/service/ai_search_service.py` の 26 行目を以下のように修正
 
-```
+    ```python
+      get_secret_from_key_vault("AI_SEARCH_API_KEY")  # 元々は os.environ.get("AI_SEARCH_API_KEY")
+    ```
+
+  - `./app/python/simple/service/aoai_service.py` の 14 行目を以下のように修正
+
+    ```python
+      get_secret_from_key_vault("AZURE_OPENAI_API_KEY")  # 元々は os.environ.get("AZURE_OPENAI_API_KEY")
+    ```
 
 - ブランチを切ってリモートリポジトリに push
 
@@ -349,7 +400,7 @@ Dec 2024
 
 <br />
 
-### Task 4: Azure Container Apps へのイメージの展開
+### Task 5: Azure Container Apps へのイメージの展開
 
 - 展開済みの Container Apps に移動、**リビジョンとレプリカ** を選択し、**[+ 新しいリビジョンを作成]** を押下
 
@@ -358,8 +409,6 @@ Dec 2024
 - Azure Container Registry、イメージ、イメージタグを選択し、**追加** を選択
 
 <br />
-
-### Task 5: シークレットの登録
 
 <br />
 
