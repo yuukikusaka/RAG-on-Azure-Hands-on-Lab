@@ -355,6 +355,8 @@ Dec 2024
 
   > シークレット名に使用できるのは、英数字とダッシュのみです。
 
+  <img src="./images/register-secrets-01.png" />
+
 ### Task 4: コンテナー イメージのビルド、プッシュ
 
 <details>
@@ -362,7 +364,7 @@ Dec 2024
 
 - Key Vault を使うようにコードを書き換え
 
-  - `./app/python/simple/service/helpers/helper_methods.py` のコメントアウトを以下のように修正
+  - GitHub にて、`./app/python/simple/service/helpers/helper_methods.py` のコメントアウトを以下のように修正し、**Commit Changes** ボタンを押下
 
     ```python
     # return "dummy_secret"　　# ビルドエラーを回避するため、ダミーの値を返す
@@ -374,27 +376,39 @@ Dec 2024
     return secret.value
     ```
 
-  - `./app/python/simple/service/ai_search_service.py` の 26 行目を以下のように修正
+  <img src="./images/container-build-push-01.png" />
+
+  - 同様に、`./app/python/simple/service/ai_search_service.py` の 26 行目を以下のように修正し、**Commit Changes** ボタンを押下
 
     ```python
       get_secret_from_key_vault("ai-search-api-key")  # 元々は os.environ.get("AI_SEARCH_API_KEY")
     ```
 
-  - `./app/python/simple/service/aoai_service.py` の 14 行目を以下のように修正
+  - `./app/python/simple/service/aoai_service.py` の 14 行目を以下のように修正し、**Commit Changes** ボタンを押下
 
     ```python
       get_secret_from_key_vault("azure-openai-api-key")  # 元々は os.environ.get("AZURE_OPENAI_API_KEY")
     ```
 
-- リモートリポジトリに push
+- GitHub Actions (`Build and Push Docker Image`) を選択、**Run workflow** から以下のパラメータを設定し、**Run workflow** ボタンを押下
 
-  > ハンズオンのため、`main` ブランチに直接 push します。
+  - Branch: `main`
+  - Resource Group Name: `ワークショップで使用中のリソースグループ名`
+  - Container Registry Name: `展開済みの Container Registry 名`
+  - Container Registry Username: `Container Registry のユーザー名(「アクセスキー」から確認可能)`
+  - Container Registry Password: `Container Registry のパスワード(「アクセスキー」から確認可能)`
+  - language: `python`
 
+  <img src="./images/container-build-push-02.png" />
 
+- ワークフローが正常終了することを確認
 
-- GitHub Actions (`Deploy-Container-Image.yml`) を手動実行
+<img src="./images/container-build-push-03.png" />
 
-  - language に `python` を選択
+- Azure Portal から Container Registry を確認し、リポジトリにコンテナイメージが展開されていることを確認
+
+<img src="./images/container-build-push-04.png" />
+
 
 </details>
 
@@ -403,7 +417,7 @@ Dec 2024
 
 - Key Vault を使うようにコードを書き換え
 
-  - `./app/csharp/simple/Services/Helpers/HelperMethods.cs` のコメントアウトを以下のように修正
+  - GitHub にて、`./app/csharp/simple/Services/Helpers/HelperMethods.cs` のコメントアウトを以下のように修正し、**Commit Changes** ボタンを押下
 
     ```csharp
       // return "DUMMY_SECRET";  // ビルドエラーを回避するため、ダミーの値を返す
@@ -415,23 +429,38 @@ Dec 2024
       return secret.Value;
     ```
 
-  - `./app/csharp/simple/Services/AiSearchService.cs` の 26 行目を以下のように修正
+  <img src="./images/container-build-push-05.png" />
+
+  - 同様に、`./app/csharp/simple/Services/AiSearchService.cs` の 26 行目を以下のように修正し、**Commit Changes** ボタンを押下
 
     ```csharp
       var apiKey = HelperMethods.GetSecretFromKeyVault("ai-search-api-key");  /// 元々は Environment.GetEnvironmentVariable("AI_SEARCH_API_KEY");
     ```
 
-  - `./app/csharp/simple/Services/AoaiService.cs` の 38 行目を以下のように修正
+  - `./app/csharp/simple/Services/AoaiService.cs` の 38 行目を以下のように修正し、**Commit Changes** ボタンを押下
 
     ```csharp
       aoaiApiKey = HelperMethods.GetSecretFromKeyVault("azure-openai-api-key");  /// 元々は Environment.GetEnvironmentVariable("AZURE_OPENAI_API_KEY");
     ```
 
-- ブランチを切ってリモートリポジトリに push
+- GitHub Actions (`Build and Push Docker Image`) を選択、**Run workflow** から以下のパラメータを設定し、**Run workflow** ボタンを押下
 
-- GitHub Actions (`Deploy-Container-Image.yml`) を手動実行
+  - Branch: `main`
+  - Resource Group Name: `ワークショップで使用中のリソースグループ名`
+  - Container Registry Name: `展開済みの Container Registry 名`
+  - Container Registry Username: `Container Registry のユーザー名(「アクセスキー」から確認可能)`
+  - Container Registry Password: `Container Registry のパスワード(「アクセスキー」から確認可能)`
+  - language: `csharp`
 
-  - language に `csharp` を選択
+  <img src="./images/container-build-push-02.png" />
+
+- ワークフローが正常終了することを確認
+
+<img src="./images/container-build-push-03.png" />
+
+- Azure Portal から Container Registry を確認し、リポジトリにコンテナイメージが展開されていることを確認
+
+<img src="./images/container-build-push-04.png" />
 
 </details>
 
