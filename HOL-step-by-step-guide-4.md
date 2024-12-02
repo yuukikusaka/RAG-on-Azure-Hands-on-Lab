@@ -471,14 +471,123 @@ Dec 2024
 
 - 展開済みの Container Apps に移動、**リビジョンとレプリカ** を選択し、**[+ 新しいリビジョンを作成]** を押下
 
+<img src="./images/container-build-push-07.png" />
+
 - [コンテナー]タブで展開済みの **simple-hello-world-container** を削除し、**[+ 追加]** 、**アプリ コンテナー** を選択
 
-- Azure Container Registry、イメージ、イメージタグを選択し、**追加** を選択
+<img src="./images/container-build-push-08.png" />
 
-<br />
+- **プロパティ**タブで以下の項目を入力し、**追加** を選択
+
+  - **コンテナーの詳細**
+    - **名前**: 任意（`rag-api`等）
+    - **イメージのソース**: `Azure Container Registry`
+    - **サブスクリプション**: ワークショップで使用中のサブスクリプション
+    - **レジストリ**: ワークショップで使用中の Container Registrty
+    - **イメージ**: `rag-api`
+    - **イメージ タグ**: コミットの SHA-1 ハッシュ値
+  - **Registry Authentication**
+    - **Authentication type**: `Secret-based`
+    - **コマンドのオーバーライド**: 空欄
+    - **引数のオーバーライド**: 空欄
+  - **コンテナー リソースの割り当て**
+    - **CPU コア**: `0.5`
+    - **メモリ (Gi)**: `1`
+
+<img src="./images/container-build-push-09.png" />
+
+- 設定した値が反映されていることを確認し、**作成**を選択
+
+<img src="./images/container-build-push-10.png" />
 
 <br />
 
 ### Task 6: API の動作確認
+
+- **⚙️ リビジョン モードの選択**を選択し、**単一リビジョン モードから複数リビジョン モードに切り替える**の**確認**を選択
+
+<img src="./images/container-build-push-11.png" />
+
+- 既存のコンテナの**アクティブ**のチェックボックスを外し、**保存**を選択
+
+- ターゲット ポートを設定
+
+  <details>
+  <summary>Python</summary>
+
+  - **イングレス** > **ターゲット ポート**に`8000`をセット
+
+  <img src="./images/container-build-push-12.png" />
+
+  - Container Apps の**概要**メニューから**アプリケーション URL**をコピーし、ブラウザから API を呼び出す
+
+    - チャット API
+
+    ```
+    https://<Container Apps のイングレス>/chat?query=こんにちは
+    ```
+
+    <img src="./images/container-build-push-13.png" />
+
+    - 全文検索 API
+
+    ```
+    https://<Container Apps のイングレス>/search/fulltext?query=AOAIとは
+    ```
+
+    <img src="./images/container-build-push-14.png" />
+
+    - ベクトル検索 API
+
+    ```
+    https://<Container Apps のイングレス>/search/vector?query=AzureOpenAI
+    ```
+
+    <img src="./images/container-build-push-15.png" />
+
+    - Container Apps メニューの**リビジョンとレプリカ**からアクティブリビジョンを選択し、**コンソール ログ ストリーム**を選択
+
+    <img src="./images/container-build-push-16.png" />
+
+    - ログが出力されていることを確認
+
+    <img src="./images/container-build-push-17.png" />
+
+  </details>
+
+  <details>
+  <summary>C#</summary>
+
+  - **イングレス** > **ターゲット ポート**に`8080`をセット
+
+  <img src="./images/container-build-push-18.png" />
+
+  - Container Apps の**概要**メニューから**アプリケーション URL**をコピーし、ブラウザから API を呼び出す
+
+    - チャット API
+
+    ```
+    https://<Container Apps のイングレス>/chat?query=こんにちは
+    ```
+
+    <img src="./images/container-build-push-19.png" />
+
+    - 全文検索 API
+
+    ```
+    https://<Container Apps のイングレス>/search/fulltext?query=AOAIとは
+    ```
+
+    <img src="./images/container-build-push-20.png" />
+
+    - ベクトル検索 API
+
+    ```
+    https://<Container Apps のイングレス>/search/vector?query=AzureOpenAI
+    ```
+
+    <img src="./images/container-build-push-21.png" />
+
+  </details>
 
 <br />

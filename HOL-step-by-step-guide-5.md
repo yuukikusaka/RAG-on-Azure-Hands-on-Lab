@@ -231,4 +231,120 @@ Dec 2024
 
 ### Task 4: API の公開
 
+- API Management の**製品**を作成
+
+  - **+ 追加**を選択
+
+  <img src="./images/publish-api-01.png" />
+
+  - 以下の項目を入力し、**作成**を選択
+
+    - **表示名**: `Unlimited`
+    - **ID**: `unlimited`
+    - **説明**: `一般公開`
+    - **発行済み**: `有効化`
+    - **サブスクリプションを要求する**: `無効化`
+    - **承認が必要**: `無効化`
+    - **サブスクリプション数の制限**: `空欄`
+    - **法律条項**: `空欄`
+    - **API**: `何も選択しない（既定）`
+
+  <img src="./images/publish-api-02.png" />
+
+- Container Apps の概要ページから**アプリケーション URL**をコピー
+
+  <img src="./images/publish-api-03.png" />
+
+- API Management の**APIs** > **API** を選択し、**HTTP**を押下
+
+  <img src="./images/publish-api-04.png" />
+
+- **Full** を選択し、以下の項目を入力し、**Create**を選択
+
+  - **Display name**: `RAG-on-Azure-HOL`
+  - **Name**: `rag-on-azure-hol`
+  - **Description**: `ハンズオン用API`
+  - **Web service URL**: `先の手順でコピーした Container Apps のアプリケーションURL`
+  - **URL scheme**: `HTTPS`
+  - **API URL suffix**: `hol`
+  - **Tags**: `空欄`
+  - **Products**: `Unlimited [Open]`
+  - **Version this API?**: `無効化`
+
+  <img src="./images/publish-api-05.png" />
+
+- `RAG-on-Azure-HOL` という API が作成されていることを確認後、**+Add operation**を選択し、以下の項目を入力
+
+  - **Frontend**
+
+    - **Display name**: `chat`
+    - **Name**: `chat`
+    - **URL**: `GET` `/chat`
+
+  - **Query**
+
+    - **+Add parameter**を選択
+
+      - NAME: `query`
+
+  - **Save**を選択
+
+  <img src="./images/publish-api-06.png" />
+
+  <img src="./images/publish-api-07.png" />
+
+-　同様の手順で、以下の項目も追加し、**Save**を選択
+
+  - **Frontend**
+
+    - **Display name**: `fulltext`
+    - **Name**: `fulltext`
+    - **URL**: `GET` `/search/fulltext`
+
+  - **Query**
+
+    - **+Add parameter**を選択
+
+      - NAME: `query`
+
+  <img src="./images/publish-api-08.png" />
+
+  - **Frontend**
+
+    - **Display name**: `vector`
+    - **Name**: `vector`
+    - **URL**: `GET` `/search/vector`
+
+  - **Query**
+
+    - **+Add parameter**を選択
+
+      - NAME: `query`
+
+  <img src="./images/publish-api-09.png" />
+
+- 以下のように3つの API が追加されていることを確認
+
+<img src="./images/publish-api-10.png" />
+
+- 公開した API を**ご自身の端末から**叩く
+
+  - API Management の[概要]ページから、**ゲートウェイの URL** をコピー
+
+  - ブラウザから以下の URL を検索
+
+    > API URL suffix として hol をつけることをお忘れないようにご注意ください
+
+    - **チャットエンドポイント**: `https://xxxxxx.azure-api.net/hol/chat?query=こんにちは`
+
+      <img src="./images/publish-api-11.png" />
+
+    - **全文検索エンドポイント**: `https://xxxxxx.azure-api.net/hol/search/fulltext?query=Azure OpenAI`
+
+      <img src="./images/publish-api-12.png" />
+
+    - **ベクトル検索エンドポイント**: `https://xxxxxx.azure-api.net/hol/search/vector?query=Azure OpenAI`
+
+      <img src="./images/publish-api-13.png" />
+
 <br />
