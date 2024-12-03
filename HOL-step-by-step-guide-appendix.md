@@ -98,6 +98,18 @@ Dec 2024
     http://localhost:8000/chat?query=こんにちは
     ```
 
+    - ブラウザから検索 API をコール
+
+    > GET /search/fulltext?query={input} で、input をクエリとする全文検索を実施可能。APIは実装済み。
+
+    ```
+    http://localhost:8000/search/fulltext?query=AOAIとは
+    ```
+
+    - AI Foundry のプロジェクトに移動し、**トレース**からパフォーマンスを確認
+
+    <img src="./images/appendix-08.png" />
+
     </details>
 
     <details>
@@ -121,6 +133,18 @@ Dec 2024
     ```
     http://localhost:8080/chat?query=こんにちは
     ```
+
+    - ブラウザから検索 API をコール
+
+    > GET /search/fulltext?query={input} で、input をクエリとする全文検索を実施可能。APIは実装済み。
+
+    ```
+    http://localhost:8080/search/fulltext?query=AOAIとは
+    ```
+
+    - AI Foundry のプロジェクトに移動し、**トレース**からパフォーマンスを確認
+
+    <img src="./images/appendix-09.png" />
 
     </details>
 
