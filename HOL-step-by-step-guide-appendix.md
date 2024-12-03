@@ -124,8 +124,6 @@ Dec 2024
 
     </details>
 
-- TODO: C# がトレースは送信できている（Application Insights では確認できている）が、AI Foundry 上から確認できない
-
 ## Appendix 3: Azure OpenAI、Document intelligence を使った評価用データセットを用いた生成 AI の評価
 
 - Notebook 実行
