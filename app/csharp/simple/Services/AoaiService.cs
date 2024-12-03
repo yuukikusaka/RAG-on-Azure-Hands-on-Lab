@@ -240,7 +240,6 @@ namespace Simple.Services
                 Temperature = 1,
                 MaxTokens = 1000
             };
-            client.Complete(requestOptions);
             Response<ChatCompletions> response = client.Complete(requestOptions);
             return response.Value.Content;
         }
