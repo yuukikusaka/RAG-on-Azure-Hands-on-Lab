@@ -6,6 +6,9 @@ using Microsoft.Extensions.Hosting;
 using DotNetEnv;
 using System;
 
+AppContext.SetSwitch("Azure.Experimental.EnableActivitySource", true);
+AppContext.SetSwitch("Azure.Experimental.TraceGenAIMessageContent", true);
+
 Env.Load();
 
 var builder = WebApplication.CreateBuilder(args);
