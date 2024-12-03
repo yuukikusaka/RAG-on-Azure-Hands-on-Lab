@@ -150,8 +150,64 @@ Dec 2024
 
 ## Appendix 3: Azure OpenAI、Document intelligence を使った評価用データセットを用いた生成 AI の評価
 
-- Notebook 実行
+- 評価用データセットを作成
+  
+    > ハンズオンで Blob Storage にアップロードしたコンテンツに基づく評価用データセットを作成します。
 
-- プロジェクトから**評価**を実行（「関連度」の評価）
+    - `evaluator/synthetic_qa_from_document.ipynb` を実行
 
-- TODO: 根拠性に関するデータ合成
+- 評価用 Azure OpenAI `gpt-4o-mini` モデルを展開
+
+    - **モデル+エンドポイント**を選択し、**+ モデルのデプロイ**、**基本モデルをデプロイする**を押下
+
+    - **gpt-4o-mini**を選択し、**確認**を押下
+
+    <img src="./images/appendix-13.png" />
+
+    - **カスタマイズ**から既存の Azure OpenAI リソースを選択し、**接続とデプロイ**を押下
+
+    <img src="./images/appendix-14.png" />
+
+- 作成されたデータセットを AI Foundry にアップロードし、プロジェクトから**評価**を実行（「関連性」の評価）
+
+    - `./evaluator/dataset/imagenet-training-summary-eval.jsonl` の内容を確認
+
+    - AI Foundry のプロジェクトに移動し、左のメニューから**評価**を選択
+
+    - **新しい評価を作成**、**データセット**を選択
+
+    <img src="./images/appendix-10.png" />
+
+    - 基本情報の追加
+
+        - **評価名**: `任意 (eval-001)`
+
+        <img src="./images/appendix-11.png" />
+
+    - テスト データを構成する
+
+        - **データセットの追加**を選択し、`./evaluator/dataset/imagenet-training-summary-eval.jsonl` をアップロード
+
+        <img src="./images/appendix-12.png" />
+
+    - メトリックの選択
+
+        - AI 品質: **関連性**
+        - 接続: **既存の Azure OpenAI (`oai-mcwfy25q2gxx`)**
+        - デプロイ名/モデル: **gpt-4o-mini**
+
+        <img src="./images/appendix-15.png" />
+
+    - データセットは評価入力にどのようにマップされていますか?
+
+        - response: **ground_truth**
+        - query: **question**
+
+        <img src="./images/appendix-16.png" />
+
+    - **次へ**を選択し、**送信**を押下
+
+    > 30秒ほどすると LLM による評価が完了し、結果を確認できます。モデルを gpt-4o に変更するなどして、様々な評価を試してみてください。
+    
+    <img src="./images/appendix-17.png" />
+
