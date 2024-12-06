@@ -1,5 +1,5 @@
 
-### 参考情報
+### 💡 参考情報
 
 - [名前付け規則を定義する](https://learn.microsoft.com/ja-jp/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming)
 
@@ -13,17 +13,21 @@
 
 <br />
 
-### 索引
+### 📝 索引
 
-- [GitHub Actions による一括展開](#github-actions-による一括展開)
+1. リソースの展開
 
-- [Bicep と Azure CLI を使用したリソースの展開](#bicep-と-azure-cli-を使用したリソースの展開)
+    自動（GitHub Actions） または 手動（Bicep） のどちらかで展開
 
-- [Private DNS Zone の作成](#private-dns-zone-の作成)
+    - [GitHub Actions による一括展開](#1-a-github-actions-による一括展開)
 
-- [仮想マシンの作成](#仮想マシンの作成)
+    - [Bicep と Azure CLI を使用したリソースの展開](#1-b-bicep-と-azure-cli-を使用したリソースの展開)
 
-- [仮想マシンへの接続](#仮想マシンへの接続)
+1. [Private DNS Zone の作成](#2-private-dns-zone-の作成)
+
+1. [仮想マシンの作成](#3-仮想マシンの作成)
+
+1. [仮想マシンへの接続](#4-仮想マシンへの接続)
 
 <br />
 
@@ -37,15 +41,15 @@
 
 <br />
 
-### 事前準備環境
+## 事前準備環境
 
 <img src="./images/preparation.png" />
 
 <br />
 
-### GitHub Actions による一括展開
+## 1-(a). GitHub Actions による一括展開
 
-#### 事前準備
+### 事前準備
 
 - リポジトリのフォーク
 
@@ -108,13 +112,15 @@
     - **AZURE_SUBSCRIPTION_ID**: サブスクリプション ID
 <br />
 
-#### リソースの展開
+### リソースの展開
 
 - <a href="https://portal.azure.com/">Azure Portal</a> からリソース グループを作成
 
 - パラメーターの指定
 
   - GitHub リポジトリの **Code** から **bicep** > **parameters** 配下の .bicepparam ファイルに展開するリソースの情報を指定
+
+    `// ChangeMe` コメントのある個所を修正
 
     - **ai.bicepparam**: AI Search と OpenAI Service アカウント
 
@@ -140,9 +146,9 @@
 
 <br />
 
-### Bicep と Azure CLI を使用したリソースの展開
+## 1-(b). Bicep と Azure CLI を使用したリソースの展開
 
-#### 事前準備
+### 事前準備
 
 - リポジトリのフォーク
 
@@ -152,7 +158,7 @@
 
 <br />
 
-#### リソースの展開
+### リソースの展開
 
 - <a href="https://portal.azure.com/">Azure Portal</a> からリソース グループを作成
 
@@ -207,7 +213,7 @@
 
 <br />
 
-### Private DNS Zone の作成
+## 2. Private DNS Zone の作成
 
 > 内部環境で作成した Container Apps Environment に展開した Container Apps に対して  
 > 仮想ネットワーク内のリソースからアクセスするために必要な DNS の設定
@@ -244,13 +250,13 @@
 
 <br />
 
-### 仮想マシンの作成
+## 3. 仮想マシンの作成
 
 <br />
 
-### 仮想マシンへの接続
+## 4. 仮想マシンへの接続
 
-#### Bastion Developer SKU の利用
+### Bastion Developer SKU の利用
 
 - **Bastion** ページで資格情報を入力し **接続** をクリック時に Bastion Developer SKU がデプロイされ Bastion 経由で仮想マシンへ接続
 
@@ -272,7 +278,7 @@
 
 <br />
 
-#### Bastion Basic SKU の利用
+### Bastion Basic SKU の利用
 
 > Bastion Developer SKU が利用不可のリージョンの場合、Bastion Basic SKU を展開
 
