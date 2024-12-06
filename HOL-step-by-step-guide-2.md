@@ -132,7 +132,7 @@ AZURE_OPENAI_API_VERSION=2024-08-01-preview
 AI_SEARCH_API_KEY=your_ai_search_key  <!--  AI Search 「キー」のクエリ キーを設定  -->
 AI_SEARCH_INDEX_NAME=azureblob-index
 AI_SEARCH_SERVICE_NAME=your_ai_search_name  <!--  例: srch-mcwfy25q2g1  -->
-AZURE_KEY_VAULT_NAME=your_key_vault_name  <!--  例: kv-mcwfy25q2g1  -->
+APPLICATIONINSIGHTS_CONNECTION_STRING="your_connection_string" <!-- Application Insights の接続文字列 -->
 ```
 
 - 作業用端末にコンテナイメージをビルドし、実行
@@ -178,6 +178,7 @@ AZURE_OPENAI_API_VERSION=2024-08-01-preview
 AI_SEARCH_API_KEY=your_ai_search_key  <!--  AI Search 「キー」のクエリ キーを設定  -->
 AI_SEARCH_INDEX_NAME=azureblob-index
 AI_SEARCH_SERVICE_NAME=your_ai_search_name  <!--  例: srch-mcwfy25q2g1  -->
+APPLICATIONINSIGHTS_CONNECTION_STRING="your_connection_string" <!-- Application Insights の接続文字列 -->
 ```
 
 - 作業用端末にコンテナイメージをビルドし、実行
