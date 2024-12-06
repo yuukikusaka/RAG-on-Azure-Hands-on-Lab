@@ -340,8 +340,8 @@ Dec 2024
   AI_SEARCH_API_KEY=your_ai_search_key
   AI_SEARCH_INDEX_NAME=azureblob-index
   AI_SEARCH_SERVICE_NAME=your_ai_search_name
-  AZURE_KEY_VAULT_NAME=your_key_vault_name
-  AI_SEARCH_VECTOR_INDEX_NAME=vector-xxxxxxxxxxxx  <!-- これを修正 -->
+  AI_SEARCH_VECTOR_INDEX_NAME=vector-xxxxxxxxxxxx  <!-- これを追加&修正 -->
+  APPLICATIONINSIGHTS_CONNECTION_STRING="your_connection_string"
   ```
 
   - 作業用端末にコンテナイメージをビルドし、実行
@@ -349,7 +349,7 @@ Dec 2024
   ```shell
   cd app/python/simple
   docker build -t python-simple:0.0.1 .
-  docker run -p 8080:8080 python-simple:0.0.1
+  docker run -p 8000:8000 python-simple:0.0.1
   ```
 
   - ブラウザからベクトル検索 API をコールし、レスポンスを取得することを確認
@@ -381,8 +381,8 @@ Dec 2024
   AI_SEARCH_API_KEY=your_ai_search_key
   AI_SEARCH_INDEX_NAME=azureblob-index
   AI_SEARCH_SERVICE_NAME=your_ai_search_name
-  AZURE_KEY_VAULT_NAME=your_key_vault_name
-  AI_SEARCH_VECTOR_INDEX_NAME=vector-xxxxxxxxxxxx  <!-- これを修正 -->
+  AI_SEARCH_VECTOR_INDEX_NAME=vector-xxxxxxxxxxxx  <!-- これを追加&修正 -->
+  APPLICATIONINSIGHTS_CONNECTION_STRING="your_connection_string"
   ```
 
   - 作業用端末にコンテナイメージをビルドし、実行
@@ -398,7 +398,7 @@ Dec 2024
   > GET /search/vector?query={input} で、上記手順で試したベクトル検索を実施可能。APIは実装済み。
 
   ```
-  http://localhost:8000/search/vector?query=Azure OpenAI の保護
+  http://localhost:8080/search/vector?query=Azure OpenAI の保護
   ```
 
   <img src="./images/vector-index-17.png" />
