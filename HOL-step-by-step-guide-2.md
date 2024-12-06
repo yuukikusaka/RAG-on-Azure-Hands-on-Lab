@@ -193,7 +193,7 @@ docker run -p 8080:8080 csharp-simple:0.0.1
 > GET /chat?query={input} で、上記手順で試した会話を行うチャットボットとの対話を実施可能。APIは実装済み。
 
 ```
-http://localhost:8000/chat?query=こんにちは
+http://localhost:8080/chat?query=こんにちは
 ```
 
 <img src="./images/ai-foundry-07.png" />
@@ -203,7 +203,7 @@ http://localhost:8000/chat?query=こんにちは
 > GET /search/fulltext?query={input} で、input をクエリとする全文検索を実施可能。APIは実装済み。
 
 ```
-http://localhost:8000/search/fulltext?query=AOAIとは
+http://localhost:8080/search/fulltext?query=AOAIとは
 ```
 
 <img src="./images/ai-foundry-08.png" />
