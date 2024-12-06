@@ -122,7 +122,7 @@ Dec 2024
 <details>
 <summary>Python</summary>
 
-- `app/python/simple/.env` ファイルに環境変数をセット
+- `/app/python/simple/.env` ファイルに環境変数をセット
 
 ```.env
 AZURE_OPENAI_ENDPOINT=https://your_aoai_service_name.openai.azure.com/  <!--  Azure OpenAI 「キーとエンドポイント」から確認  -->
@@ -178,7 +178,6 @@ AZURE_OPENAI_API_VERSION=2024-08-01-preview
 AI_SEARCH_API_KEY=your_ai_search_key  <!--  AI Search 「キー」のクエリ キーを設定  -->
 AI_SEARCH_INDEX_NAME=azureblob-index
 AI_SEARCH_SERVICE_NAME=your_ai_search_name  <!--  例: srch-mcwfy25q2g1  -->
-AZURE_KEY_VAULT_NAME=your_key_vault_name  <!--  例: kv-mcwfy25q2g1  -->
 ```
 
 - 作業用端末にコンテナイメージをビルドし、実行
