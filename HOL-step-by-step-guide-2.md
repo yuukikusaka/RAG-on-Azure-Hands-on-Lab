@@ -19,13 +19,17 @@ Dec 2024
 
 - 2 種類のAzure OpenAI モデルを展開
 
-    - 展開済みの Azure OpenAI リソースに移動し、**Build in Azure AI Studio (preview)** を選択
+    - 展開済みの Azure OpenAI リソースに移動し、**[Go to Azure AI Studio]** を選択
 
-    <img src="./images/ai-foundry-01.png" />
+        <img src="./images/ai-foundry-01.png" />
 
-    - **デプロイ** > **+ モデルのデプロイ** を選択
+    - **共有リソース** > **デプロイ** を選択
 
-    <img src="./images/ai-foundry-02.png" />
+        <img src="./images/ai-foundry-011.png" />
+
+    - **デプロイ** > **+ モデルのデプロイ** を開き、 **基本モデルをデプロイする** を選択
+
+        <img src="./images/ai-foundry-02.png" />
 
     - `gpt-4o` をデプロイ
 
@@ -34,8 +38,9 @@ Dec 2024
         - デプロイの詳細:
 
             - モデル バージョン: **2024-08-06**
-            - リソースの場所: **westus**
+            - リソースの場所: (自動設定)
             - 1 分あたりのトークン数レート制限: **450K**
+            - コンテンツフィルター: **DefaultV2**
 
         <img src="./images/ai-foundry-03.png" />
 
