@@ -19,13 +19,17 @@ Dec 2024
 
 - 2 種類のAzure OpenAI モデルを展開
 
-    - 展開済みの Azure OpenAI リソースに移動し、**Build in Azure AI Studio (preview)** を選択
+    - 展開済みの Azure OpenAI リソースに移動し、**[Go to Azure AI Studio]** を選択
 
-    <img src="./images/ai-foundry-01.png" />
+        <img src="./images/ai-foundry-01.png" />
 
-    - **デプロイ** > **+ モデルのデプロイ** を選択
+    - **共有リソース** > **デプロイ** を選択
 
-    <img src="./images/ai-foundry-02.png" />
+        <img src="./images/ai-foundry-011.png" />
+
+    - **デプロイ** > **+ モデルのデプロイ** を開き、 **基本モデルをデプロイする** を選択
+
+        <img src="./images/ai-foundry-02.png" />
 
     - `gpt-4o` をデプロイ
 
@@ -34,8 +38,9 @@ Dec 2024
         - デプロイの詳細:
 
             - モデル バージョン: **2024-08-06**
-            - リソースの場所: **westus**
+            - リソースの場所: (自動設定)
             - 1 分あたりのトークン数レート制限: **450K**
+            - コンテンツフィルター: **DefaultV2**
 
         <img src="./images/ai-foundry-03.png" />
 
@@ -117,7 +122,7 @@ Dec 2024
 <details>
 <summary>Python</summary>
 
-- `app/python/simple/.env` ファイルに環境変数をセット
+- `/app/python/simple/.env` ファイルに環境変数をセット
 
 ```.env
 AZURE_OPENAI_ENDPOINT=https://your_aoai_service_name.openai.azure.com/  <!--  Azure OpenAI 「キーとエンドポイント」から確認  -->
@@ -173,7 +178,6 @@ AZURE_OPENAI_API_VERSION=2024-08-01-preview
 AI_SEARCH_API_KEY=your_ai_search_key  <!--  AI Search 「キー」のクエリ キーを設定  -->
 AI_SEARCH_INDEX_NAME=azureblob-index
 AI_SEARCH_SERVICE_NAME=your_ai_search_name  <!--  例: srch-mcwfy25q2g1  -->
-AZURE_KEY_VAULT_NAME=your_key_vault_name  <!--  例: kv-mcwfy25q2g1  -->
 ```
 
 - 作業用端末にコンテナイメージをビルドし、実行

@@ -1,6 +1,6 @@
 using '../templates/container.bicep'
 
-param acrName = 'acrmcwfy25q2g3111'  // ChangeMe（末尾の数字を変える）
+param acrName = 'acrmcwfy25q2g3110'  // ChangeMe（末尾の数字を変える）
 
 param workspaceName = 'log-mcw25q2g3110'  // ChangeMe（末尾の数字を変える）
 param appInsightsName = 'appi-mcwfy25q2g3110'  // ChangeMe（末尾の数字を変える）
