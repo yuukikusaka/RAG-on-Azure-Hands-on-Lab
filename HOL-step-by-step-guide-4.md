@@ -247,7 +247,9 @@ Dec 2024
   AI_SEARCH_API_KEY=your_ai_search_key
   AI_SEARCH_INDEX_NAME=azureblob-index
   AI_SEARCH_SERVICE_NAME=your_ai_search_name
+  AI_SEARCH_VECTOR_INDEX_NAME=vector-xxxxxxxxxxxx
   AZURE_KEY_VAULT_NAME=your_key_vault_name  # ← 例: kv-cwsfy25q2g1に置き換える
+  APPLICATIONINSIGHTS_CONNECTION_STRING="your_connection_string"
   ```
   </details>
 
@@ -264,7 +266,9 @@ Dec 2024
   AI_SEARCH_API_KEY=your_ai_search_key
   AI_SEARCH_INDEX_NAME=azureblob-index
   AI_SEARCH_SERVICE_NAME=your_ai_search_name
+  AI_SEARCH_VECTOR_INDEX_NAME=vector-xxxxxxxxxxxx
   AZURE_KEY_VAULT_NAME=your_key_vault_name  # ← 例: kv-cwsfy25q2g1に置き換える
+  APPLICATIONINSIGHTS_CONNECTION_STRING="your_connection_string"
   ```
   </details>
 
@@ -359,6 +363,73 @@ Dec 2024
 
 ### Task 4: コンテナー イメージのビルド、プッシュ
 
+<details>
+<summary>Python</summary>
+
+- GitHub リポジトリ に `.env` ファイルが含まれないことを確認
+
+    - `/app/python/simple/.gitignore` に `.env` が含まれていることを確認
+
+        <img src="./images/container-build-push-01a.png" />
+
+- GitHub Actions (`Build and Push Docker Image`) を選択、**Run workflow** から以下のパラメータを設定し、**Run workflow** ボタンを押下
+
+  - Branch: `main`
+  - Resource Group Name: `ワークショップで使用中のリソースグループ名`
+  - Container Registry Name: `展開済みの Container Registry 名`
+  - Container Registry Username: `Container Registry のユーザー名(「アクセスキー」から確認可能)`
+  - Container Registry Password: `Container Registry のパスワード(「アクセスキー」から確認可能)`
+  - language: `python`
+
+  <img src="./images/container-build-push-02.png" />
+
+- ワークフローが正常終了することを確認
+
+  <img src="./images/container-build-push-03.png" />
+
+- Azure Portal から Container Registry を確認し、リポジトリにコンテナイメージが展開されていることを確認
+
+  <img src="./images/container-build-push-04.png" />
+
+</details>
+
+<details>
+<summary>C#</summary>
+
+- GitHub リポジトリ および Dockerコンテナ に `.env` ファイルが含まれないよう修正
+
+  - `/app/csharp/simple/.gitignore` に `.env` が含まれていることを確認
+
+    <img src="./images/container-build-push-05a.png" />
+
+  - `/app/csharp/simple/Dockerfile` の 19行目 `COPY .env .` を削除
+
+    修正したらコミット＆プッシュ
+
+    <img src="./images/container-build-push-05b.png" />
+
+
+- GitHub Actions (`Build and Push Docker Image`) を選択、**Run workflow** から以下のパラメータを設定し、**Run workflow** ボタンを押下
+
+  - Branch: `main`
+  - Resource Group Name: `ワークショップで使用中のリソースグループ名`
+  - Container Registry Name: `展開済みの Container Registry 名`
+  - Container Registry Username: `Container Registry のユーザー名(「アクセスキー」から確認可能)`
+  - Container Registry Password: `Container Registry のパスワード(「アクセスキー」から確認可能)`
+  - language: `csharp`
+
+  <img src="./images/container-build-push-02.png" />
+
+- ワークフローが正常終了することを確認
+
+  <img src="./images/container-build-push-03.png" />
+
+- Azure Portal から Container Registry を確認し、リポジトリにコンテナイメージが展開されていることを確認
+
+  <img src="./images/container-build-push-04.png" />
+
+</details>
+<!-- 
 <details>
 <summary>Python</summary>
 
@@ -463,6 +534,7 @@ Dec 2024
 <img src="./images/container-build-push-04.png" />
 
 </details>
+-->
 
 
 <br />
@@ -477,7 +549,7 @@ Dec 2024
 
 <img src="./images/container-build-push-08.png" />
 
-- **プロパティ**タブで以下の項目を入力し、**追加** を選択
+- **プロパティ**タブで以下の項目を入力
 
   - **コンテナーの詳細**
     - **名前**: 任意（`rag-api`等）
@@ -494,11 +566,18 @@ Dec 2024
     - **CPU コア**: `0.5`
     - **メモリ (Gi)**: `1`
 
-<img src="./images/container-build-push-09.png" />
+  <img src="./images/container-build-push-09.png" />
+
+- **環境変数**タブで以下の項目を入力し、**追加** を選択
+
+    |名前|ソース|値|
+    |---|---|---|
+
+  <img src="./images/container-build-push-09b.png" />
 
 - 設定した値が反映されていることを確認し、**作成**を選択
 
-<img src="./images/container-build-push-10.png" />
+  <img src="./images/container-build-push-10.png" />
 
 <br />
 
@@ -510,7 +589,7 @@ Dec 2024
 
 - 既存のコンテナの**アクティブ**のチェックボックスを外し、**保存**を選択
 
-- ターゲット ポートを設定
+- Container Apps に対する イングレス の ターゲット ポートを設定
 
   <details>
   <summary>Python</summary>
@@ -518,40 +597,6 @@ Dec 2024
   - **イングレス** > **ターゲット ポート**に`8000`をセット
 
   <img src="./images/container-build-push-12.png" />
-
-  - Container Apps の**概要**メニューから**アプリケーション URL**をコピーし、ブラウザから API を呼び出す
-
-    - チャット API
-
-    ```
-    https://<Container Apps のイングレス>/chat?query=こんにちは
-    ```
-
-    <img src="./images/container-build-push-13.png" />
-
-    - 全文検索 API
-
-    ```
-    https://<Container Apps のイングレス>/search/fulltext?query=AOAIとは
-    ```
-
-    <img src="./images/container-build-push-14.png" />
-
-    - ベクトル検索 API
-
-    ```
-    https://<Container Apps のイングレス>/search/vector?query=AzureOpenAI
-    ```
-
-    <img src="./images/container-build-push-15.png" />
-
-    - Container Apps メニューの**リビジョンとレプリカ**からアクティブリビジョンを選択し、**コンソール ログ ストリーム**を選択
-
-    <img src="./images/container-build-push-16.png" />
-
-    - ログが出力されていることを確認
-
-    <img src="./images/container-build-push-17.png" />
 
   </details>
 
@@ -562,32 +607,36 @@ Dec 2024
 
   <img src="./images/container-build-push-18.png" />
 
-  - Container Apps の**概要**メニューから**アプリケーション URL**をコピーし、ブラウザから API を呼び出す
-
-    - チャット API
-
-    ```
-    https://<Container Apps のイングレス>/chat?query=こんにちは
-    ```
-
-    <img src="./images/container-build-push-19.png" />
-
-    - 全文検索 API
-
-    ```
-    https://<Container Apps のイングレス>/search/fulltext?query=AOAIとは
-    ```
-
-    <img src="./images/container-build-push-20.png" />
-
-    - ベクトル検索 API
-
-    ```
-    https://<Container Apps のイングレス>/search/vector?query=AzureOpenAI
-    ```
-
-    <img src="./images/container-build-push-21.png" />
-
   </details>
+
+  <br />
+
+- Container Apps の**概要**メニューから**アプリケーション URL**をコピーし、ブラウザから API を呼び出す
+
+  (*) VNet 内に展開している仮想マシン内のブラウザからアクセスする
+
+  - チャット API
+
+  ```
+  https://<Container Apps のイングレス>/chat?query=こんにちは
+  ```
+
+  <img src="./images/container-build-push-19.png" />
+
+  - 全文検索 API
+
+  ```
+  https://<Container Apps のイングレス>/search/fulltext?query=AOAIとは
+  ```
+
+  <img src="./images/container-build-push-20.png" />
+
+  - ベクトル検索 API
+
+  ```
+  https://<Container Apps のイングレス>/search/vector?query=AzureOpenAI
+  ```
+
+  <img src="./images/container-build-push-21.png" />
 
 <br />
