@@ -592,10 +592,10 @@ Dec 2024
   | 名前                                   | ソース         | 値                                                                                                    |
   |----------------------------------------|----------------|-------------------------------------------------------------------------------------------------------|
   | AZURE_OPENAI_ENDPOINT                  | 手動エントリ   | (Azure OpenAI Service の エンドポイント) |
-  | AZURE_OPENAI_API_KEY                   | シークレットの参照   | `ai-search-api-key` |
+  | AZURE_OPENAI_API_KEY                   | シークレットの参照   | `azure-openai-api-key` |
   | AZURE_OPENAI_DEPLOYMENT                | 手動エントリ   | `gpt-4o` |
   | AZURE_OPENAI_API_VERSION               | 手動エントリ   | `2024-08-01-preview` |
-  | AI_SEARCH_API_KEY                      | シークレットの参照   | `azure-openai-api-key` |
+  | AI_SEARCH_API_KEY                      | シークレットの参照   | `ai-search-api-key` |
   | AI_SEARCH_INDEX_NAME                   | 手動エントリ   | `azureblob-index`|
   | AI_SEARCH_SERVICE_NAME                 | 手動エントリ   | (Azure AI Search の リソース名)|
   | AI_SEARCH_VECTOR_INDEX_NAME            | 手動エントリ   | vector-xxxxxxxxxxxx|
