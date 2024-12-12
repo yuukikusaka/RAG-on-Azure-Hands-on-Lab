@@ -218,7 +218,7 @@ Dec 2024
     |text|●||||●|日本語 ‐ Microsoft||
     |layoutText|●||||●|日本語 ‐ Microsoft||
     |imageTags|●|●||●|●|標準 ‐ Lucene||
-    |imageTags|●|●||●|●|標準 ‐ Lucene||
+    |imageCaption|●|●||●|●|標準 ‐ Lucene||
 
 - **次: インデクサーの作成** をクリック
 
