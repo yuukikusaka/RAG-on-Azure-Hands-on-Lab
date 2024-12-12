@@ -19,7 +19,7 @@ Dec 2024
 
 - 2 種類のAzure OpenAI モデルを展開
 
-    - 展開済みの Azure OpenAI リソースに移動し、**[Go to Azure AI Studio]** を選択
+    - 展開済みの Azure OpenAI リソースに移動し、**[Go to Azure Foundry Portal]** を選択
 
         <img src="./images/ai-foundry-01.png" />
 
