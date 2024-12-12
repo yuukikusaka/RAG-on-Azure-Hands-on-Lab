@@ -6,12 +6,12 @@
 
 ┣ .github  
 ┃   ┗ workflows (ワークフロー)  
-┣ app
-┃   ┣ csharp
-┃      ┗ simple (C# サンプルアプリ)
-┃   ┗ python
-┃      ┗ simple (Python サンプルアプリ)
-┣ bidep  
+┣ app  
+┃   ┣ csharp  
+┃   ┃   ┗ simple (C# 版シンプルなサンプルアプリ)  
+┃   ┗ python (Bicep パラメーター)  
+┃   ┃   ┗ simple (Python 版シンプルなサンプルアプリ)  
+┣ bicep  
 ┃   ┣ modules (Bicep モジュール)  
 ┃   ┣ parameters (Bicep パラメーター)  
 ┃   ┗ templates (Bicep テンプレート)  
