@@ -9,6 +9,10 @@ Dec 2024
 
 - [Exercise 2: 生成 AI アプリケーションの動作確認](#exercise-2-生成-AI-アプリケーションの動作確認)
 
+  - [Task 1: Azure AI Foundry プレイグラウンドを用いた動作確認](#task-1-Azure-AI-Foundry-プレイグラウンドを用いた動作確認)
+
+  - [Task 2: 作業用端末での動作確認](#task-1-作業用端末での動作確認)
+
 ## Exercise 2: 生成 AI アプリケーションの動作確認
 
 <img src="./images/Ex2.png" />
@@ -17,7 +21,7 @@ Dec 2024
 
 ### Task 1: Azure AI Foundry プレイグラウンドを用いた動作確認
 
-- 2 種類のAzure OpenAI モデルを展開
+- 2 種類のAzure OpenAI モデル（`gpt-4o`、`text-embedding-3-small`）を展開
 
     - 展開済みの Azure OpenAI リソースに移動し、**[Go to Azure Foundry Portal]** を選択
 
@@ -122,7 +126,7 @@ Dec 2024
 <details>
 <summary>Python</summary>
 
-- `/app/python/simple/.env` ファイルに環境変数をセット
+- `/app/python/simple/_sample.env` をもとに **`/app/python/simple/.env` ファイルを作成し**、環境変数をセット
 
 ```.env
 AZURE_OPENAI_ENDPOINT=https://your_aoai_service_name.openai.azure.com/  <!--  Azure OpenAI 「キーとエンドポイント」から確認  -->
@@ -132,7 +136,9 @@ AZURE_OPENAI_API_VERSION=2024-08-01-preview
 AI_SEARCH_API_KEY=your_ai_search_key  <!--  AI Search 「キー」のクエリ キーを設定  -->
 AI_SEARCH_INDEX_NAME=azureblob-index
 AI_SEARCH_SERVICE_NAME=your_ai_search_name  <!--  例: srch-mcwfy25q2g1  -->
-APPLICATIONINSIGHTS_CONNECTION_STRING="your_connection_string" <!-- Application Insights の接続文字列 -->
+AZURE_KEY_VAULT_NAME=your_key_vault_name  <!--  Ex. 2 では不要  -->
+AI_SEARCH_VECTOR_INDEX_NAME=vector-xxxxxxxxxxxx  <!--  Ex. 2 では不要  -->
+APPLICATIONINSIGHTS_CONNECTION_STRING="InstrumentationKey=xxxxxxxxxxxx" <!-- Azure Portal から「Application Insights」を検索し、Application Insights の概要ページから確認 -->
 ```
 
 - 作業用端末にコンテナイメージをビルドし、実行
@@ -168,7 +174,7 @@ http://localhost:8000/search/fulltext?query=AOAIとは
 <details>
 <summary>C#</summary>
 
-- `app/csharp/simple/.env` ファイルに環境変数をセット
+- `/app/csharp/simple/_sample.env` をもとに **`/app/csharp/simple/.env` ファイルを作成し**、環境変数をセット
 
 ```.env
 AZURE_OPENAI_ENDPOINT=https://your_aoai_service_name.openai.azure.com/  <!--  Azure OpenAI 「キーとエンドポイント」から確認  -->
@@ -178,7 +184,9 @@ AZURE_OPENAI_API_VERSION=2024-08-01-preview
 AI_SEARCH_API_KEY=your_ai_search_key  <!--  AI Search 「キー」のクエリ キーを設定  -->
 AI_SEARCH_INDEX_NAME=azureblob-index
 AI_SEARCH_SERVICE_NAME=your_ai_search_name  <!--  例: srch-mcwfy25q2g1  -->
-APPLICATIONINSIGHTS_CONNECTION_STRING="your_connection_string" <!-- Application Insights の接続文字列 -->
+AZURE_KEY_VAULT_NAME=your_key_vault_name  <!--  Ex. 2 では不要  -->
+AI_SEARCH_VECTOR_INDEX_NAME=vector-xxxxxxxxxxxx  <!--  Ex. 2 では不要  -->
+APPLICATIONINSIGHTS_CONNECTION_STRING="InstrumentationKey=xxxxxxxxxxxx" <!-- Azure Portal から「Application Insights」を検索し、Application Insights の概要ページから確認 -->
 ```
 
 - 作業用端末にコンテナイメージをビルドし、実行
