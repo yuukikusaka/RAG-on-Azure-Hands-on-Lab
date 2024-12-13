@@ -7,7 +7,11 @@ Dec 2024
 
 ### Contents
 
-- AI Foundry を使った運用
+- [Appendix 1: Azure OpenAI 使用状況の確認](#appendix-1-azure-openai-使用状況の確認)
+
+- [Appendix 2: トレースを使用したアプリケーションのデバッグ](#appendix-2-トレースを使用したアプリケーションのデバッグ)
+
+- [Appendix 3: Azure OpenAI、Document intelligence を活用して作成した評価用データセットを用いた生成 AI の評価](#appendix-3-azure-openai-document-intelligence-を活用して作成した評価用データセットを用いた生成-ai-の評価)
 
 <br />
 
@@ -23,7 +27,7 @@ Dec 2024
 
     - Azure Portal の検索バーに `AI Project` と入力し、**Azure AI Studio** を選択
 
-    - 以下の項目を入力
+    - **Hub** を選択し、以下の項目を入力
 
         - **基本**
 
@@ -61,7 +65,7 @@ Dec 2024
 
     <img src="./images/appendix-05.png" />
 
-- Storage リソースに対してログイン中のユーザーに `Storage File Data Privileged Contributor` の権限を付与
+- Storage リソースに対して、ログイン中のユーザーに `Storage File Data Privileged Contributor` の権限を付与
 
     - 展開されたストレージアカウント（例: `hubcloudworkshxxxxx`）の **アクセス制御 (IAM)**から **+ 追加** > **ロールの割り当てを追加**を選択
 
@@ -74,10 +78,6 @@ Dec 2024
     - メンバータブでワークショップで使用中のユーザーを選択し、**次へ**を押下
 
     - **レビューと割り当て**を押下
-
-- `.env` に `APPLICATIONINSIGHTS_CONNECTION_STRING` 環境変数を設定
-
-    - Application Insights の概要ページから、**接続文字列** (`InstrumentationKey=xxxxx`)をコピー
 
     <details>
     <summary>Python</summary>
@@ -150,13 +150,19 @@ Dec 2024
 
     </details>
 
-## Appendix 3: Azure OpenAI、Document intelligence を使った評価用データセットを用いた生成 AI の評価
+## Appendix 3: Azure OpenAI、Document intelligence を活用して作成した評価用データセットを用いた生成 AI の評価
+
+<img src="./images/appendix-19.png" />
+
+> 文書のタイプに応じて処理内容を分類し、評価用データセットを作成します。
 
 - 評価用データセットを作成
   
     > ハンズオンで Blob Storage にアップロードしたコンテンツに基づく評価用データセットを作成します。
 
     - `evaluator/synthetic_qa_from_document.ipynb` を実行
+
+    > Kernel は Python 3.12.7 を選択してください。
 
 - 評価用 Azure OpenAI `gpt-4o-mini` モデルを展開
 

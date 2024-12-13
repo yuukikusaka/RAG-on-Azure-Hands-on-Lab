@@ -231,7 +231,7 @@ Dec 2024
 
 ### Task 4: API の公開
 
-- API Management の**製品**を作成
+- API Management の **APIs** > **製品**を作成
 
   - **+ 追加**を選択
 
