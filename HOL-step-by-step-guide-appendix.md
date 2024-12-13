@@ -11,7 +11,7 @@ Dec 2024
 
 - [Appendix 2: トレースを使用したアプリケーションのデバッグ](#appendix-2-トレースを使用したアプリケーションのデバッグ)
 
-- [Appendix 3: Azure OpenAI、Document intelligence を活用して作成した評価用データセットを用いた生成 AI の評価](#appendix-1-azure-openai-document-intelligence-を活用して作成した評価用データセットを用いた生成-ai-の評価)
+- [Appendix 3: Azure OpenAI、Document intelligence を活用して作成した評価用データセットを用いた生成 AI の評価](#appendix-3-azure-openai-document-intelligence-を活用して作成した評価用データセットを用いた生成-ai-の評価)
 
 <br />
 
