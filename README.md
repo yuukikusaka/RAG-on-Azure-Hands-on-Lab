@@ -19,3 +19,7 @@
 ┣ Before-the-HOL.md  
 ┣ HOL step-by-step Guide.md  
 ┗ README.md  
+
+### API 仕様
+
+仕様書は[こちら](https://kohei3110.github.io/RAG-on-Azure-Hands-on-Lab/)をご覧ください。
