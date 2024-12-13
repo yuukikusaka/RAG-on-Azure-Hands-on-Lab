@@ -17,13 +17,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "status": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "required": ["status"]
+                                    "$ref": "#/components/schemas/HealthResponse"
                                 }
                             }
                         }
@@ -102,11 +96,11 @@
                         "description": "Successful Response",
                         "content": {
                             "application/json": {
-                                "schema": {},
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResponse"
+                                },
                                 "example": {
-                                    "summary": "Azure OpenAI Service は、OpenAI の強力な言語モデル（GPT-4o、GPT-4 Turbo、GPT-3.5-Turbo など）にアクセスできるサービスです。これにより、コンテンツ生成や自然言語処理、翻訳などのタスクに使用できます。また、REST API、Python SDK、Azure OpenAI Studio を通じて接続が可能です。",
-                                    "additional_info": "Azure OpenAI では、プロンプトと入力候補を利用して、ユーザーが入力したテキストに応じたテキスト出力を生成します。モデルの設定やデプロイは、Azureのインターフェースを利用して行うことができます。",
-                                    "source": "出典: [Azure OpenAI Service Documentation]"
+                                    "$ref": "#/components/examples/SearchResponseExample"
                                 }
                             }
                         }
@@ -145,39 +139,12 @@
                         "description": "Successful Response",
                         "content": {
                             "application/json": {
-                                "schema": {},
-                                "example": {
-                                    "summary": "Azure OpenAI Service は、OpenAI の強力な言語モデル（GPT-4o、GPT-4 Turbo、GPT-3.5-Turbo など）にアクセスできるサービスです。これにより、コンテンツ生成や自然言語処理、翻訳などのタスクに使用できます。また、REST API、Python SDK、Azure OpenAI Studio を通じて接続が可能です。",
-                                    "additional_info": "Azure OpenAI では、プロンプトと入力候補を利用して、ユーザーが入力したテキストに応じたテキスト出力を生成します。モデルの設定やデプロイは、Azureのインターフェースを利用して行うことができます。",
-                                    "source": "出典: [Azure OpenAI Service Documentation]"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "content": {
-                            "text/plain": {
                                 "schema": {
-                                    "type": "string"
+                                    "$ref": "#/components/schemas/SearchResponse"
+                                },
+                                "example": {
+                                    "$ref": "#/components/examples/SearchResponseExample"
                                 }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/openapi.json": {
-            "get": {
-                "summary": "Get Open Api Endpoint",
-                "description": "OpenAPIエンドポイントを取得します。\n\nこのエンドポイントは、Simple APIのOpenAPI仕様を返します。\n\nReturns:\n    dict: OpenAPI仕様。",
-                "operationId": "get_open_api_endpoint_openapi_json_get",
-                "responses": {
-                    "200": {
-                        "description": "Successful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
                             }
                         }
                     },
@@ -216,51 +183,36 @@
                     }
                 }
             },
-            "HTTPValidationError": {
+            "HealthResponse": {
+                "type": "object",
                 "properties": {
-                    "detail": {
-                        "items": {
-                            "$ref": "#/components/schemas/ValidationError"
-                        },
-                        "type": "array",
-                        "title": "Detail"
+                    "status": {
+                        "type": "string"
                     }
                 },
-                "type": "object",
-                "title": "HTTPValidationError"
+                "required": ["status"]
             },
-            "ValidationError": {
+            "SearchResponse": {
+                "type": "object",
                 "properties": {
-                    "loc": {
-                        "items": {
-                            "anyOf": [
-                                {
-                                    "type": "string"
-                                },
-                                {
-                                    "type": "integer"
-                                }
-                            ]
-                        },
-                        "type": "array",
-                        "title": "Location"
+                    "summary": {
+                        "type": "string"
                     },
-                    "msg": {
-                        "type": "string",
-                        "title": "Message"
+                    "additional_info": {
+                        "type": "string"
                     },
-                    "type": {
-                        "type": "string",
-                        "title": "Error Type"
+                    "source": {
+                        "type": "string"
                     }
                 },
-                "type": "object",
-                "required": [
-                    "loc",
-                    "msg",
-                    "type"
-                ],
-                "title": "ValidationError"
+                "required": ["summary", "additional_info", "source"]
+            }
+        },
+        "examples": {
+            "SearchResponseExample": {
+                "summary": "Azure OpenAI Service は、OpenAI の強力な言語モデル（GPT-4o、GPT-4 Turbo、GPT-3.5-Turbo など）にアクセスできるサービスです。これにより、コンテンツ生成や自然言語処理、翻訳などのタスクに使用できます。また、REST API、Python SDK、Azure OpenAI Studio を通じて接続が可能です。",
+                "additional_info": "Azure OpenAI では、プロンプトと入力候補を利用して、ユーザーが入力したテキストに応じたテキスト出力を生成します。モデルの設定やデプロイは、Azureのインターフェースを利用して行うことができます。",
+                "source": "出典: [Azure OpenAI Service Documentation]"
             }
         }
     }
